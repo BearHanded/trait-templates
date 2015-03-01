@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html>
+	<head> 
+		<link rel="stylesheet" href="css/style.css" />
+		<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+		<title>V.01 Traits</title>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    	<!-- Include Tipsy: https://github.com/jaz303/tipsy, MIT License -->
+    	<script type='text/javascript' src='app/js/jquery.tipsy.js'></script>
+    	<link rel="stylesheet" href="css/tipsy.css" type="text/css" />
+    	<!-- trait scripts -->
+		<script type="text/javascript" src="js/global-scripts.js"></script>
+		<script type="text/javascript" src="js/overwolf-tools.js"></script>
+		<script type="text/javascript" src="js/menu.js"></script>
+		</head>
+
+	<body>
+		<div class="resizeGrip" id="resizeGripTopLeft" onmousedown="dragResize('TopLeft');"></div>
+		<div class="resizeGrip" id="resizeGripTop" onmousedown="dragResize('Top');"></div>
+		<div class="resizeGrip" id="resizeGripTopRight" onmousedown="dragResize('TopRight');"></div>
+		<div class="resizeGrip" id="resizeGripRight" onmousedown="dragResize('Right');"></div>
+		<div class="resizeGrip" id="resizeGripBottomRight" onmousedown="dragResize('BottomRight');"></div>
+		<div class="resizeGrip" id="resizeGripBottom" onmousedown="dragResize('Bottom');"></div>
+		<div class="resizeGrip" id="resizeGripBottomLeft" onmousedown="dragResize('BottomLeft');"></div>
+		<div class="resizeGrip" id="resizeGripLeft" onmousedown="dragResize('Left');"></div>
+		<div id="content" onmousedown="dragMove();">
+			<div id="menu">
+				<div id="classSelection">
+					<table id = "classTable">
+						<tr><td> 
+							<input type="button" class="classButton" onclick="populateClassBuilds('WARRIOR')" id="warriorButton" value="Warrior"/>
+						</td></tr>
+						<tr><td> 
+							<input type="button" class="classButton" onclick="populateClassBuilds('GUARDIAN')" id="guardianButton" value="Guardian"/>
+						</td></tr>
+						<tr><td> 
+							<input type="button" class="classButton" onclick="populateClassBuilds('ENGINEER')" id="engineerButton" value="Engineer"/>
+						</td></tr>
+						<tr><td> 
+							<input type="button" class="classButton" onclick="populateClassBuilds('RANGER')" id="rangerButton" value="Ranger"/>
+						</td></tr>
+						<tr><td> 
+							<input type="button" class="classButton" onclick="populateClassBuilds('THIEF')" id="thiefButton" value="Thief"/>
+						</td></tr>
+						<tr><td> 
+							<input type="button" class="classButton" onclick="populateClassBuilds('ELEMENTALIST')" id="elementalistButton" value="Elementalist"/>
+						</td></tr>
+						<tr><td> 
+							<input type="button" class="classButton" onclick="populateClassBuilds('NECROMANCER')" id="necromancerButton" value="Necromancer"/>
+						</td></tr>
+						<tr><td> 
+							<input type="button" class="classButton" onclick="populateClassBuilds('MESMER')" id="mesmerButton" value="Mesmer"/>
+						</td></tr>
+					</table>
+				</div>
+
+				<div id="buildSelection">
+					<table id="buildList">
+						<!-- NEW BUILD LINK WILL BE INSERTED HERE UPON SELECTING A CLASS -->
+					</table>
+
+				</div>
+			</div>
+			<button id="close" onclick="closeWindow();">Close</button>
+		</div>
+		<div id="traitEditor">
+			HELLO FROM THE TRAIT EDITOR
+		</div>
+	</body>
+</html>

@@ -1,3 +1,10 @@
+$(document).ready(function(){
+
+    $("#menu").show();
+    $("#traitEditor").hide();
+});
+
+
 
 //Prettify template data
 function traitValueToRomanNumeral(value) {
