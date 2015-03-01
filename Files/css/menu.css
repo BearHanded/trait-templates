@@ -1,0 +1,31 @@
+#classSelection {
+	margin: 0;
+    padding: 0;
+	float:left;
+	width: 150px;
+}
+.classButton:hover {
+	color: white;
+}
+.className {
+    font-style: italic;
+}
+#buildSelection {
+	margin-left: 150px;
+}
+
+#newBuildLink {
+	text-align: right;
+}
+
+#buildList {
+	width:100%;
+}
+
+#buildList tr:hover {
+	color: white;
+}
+
+.alternateRows tr:nth-child(odd) {
+	background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.5)), to(rgba(0, 0, 0, 0.2)));
+}

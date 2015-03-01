@@ -1,70 +1,63 @@
 ﻿<!DOCTYPE html>
 <html>
 	<head> 
-		<link rel="stylesheet" href="css/style.css" />
 		<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
 		<title>V.01 Traits</title>
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     	<!-- Include Tipsy: https://github.com/jaz303/tipsy, MIT License -->
-    	<script type='text/javascript' src='app/js/jquery.tipsy.js'></script>
+    	<script type='text/javascript' src='js/jquery.tipsy.js'></script>
     	<link rel="stylesheet" href="css/tipsy.css" type="text/css" />
+    	<!-- css -->
+    	<link rel="stylesheet" href="css/window-style.css" />
+    	<link rel="stylesheet" href="css/trait-screen.css" />
+    	<link rel="stylesheet" href="css/menu.css" />
+
     	<!-- trait scripts -->
 		<script type="text/javascript" src="js/global-scripts.js"></script>
+		<script type="text/javascript" src="js/trait-scripts.js"></script>
 		<script type="text/javascript" src="js/overwolf-tools.js"></script>
 		<script type="text/javascript" src="js/menu.js"></script>
 		</head>
 
 	<body>
-		<div class="resizeGrip" id="resizeGripTopLeft" onmousedown="dragResize('TopLeft');"></div>
-		<div class="resizeGrip" id="resizeGripTop" onmousedown="dragResize('Top');"></div>
-		<div class="resizeGrip" id="resizeGripTopRight" onmousedown="dragResize('TopRight');"></div>
-		<div class="resizeGrip" id="resizeGripRight" onmousedown="dragResize('Right');"></div>
-		<div class="resizeGrip" id="resizeGripBottomRight" onmousedown="dragResize('BottomRight');"></div>
-		<div class="resizeGrip" id="resizeGripBottom" onmousedown="dragResize('Bottom');"></div>
-		<div class="resizeGrip" id="resizeGripBottomLeft" onmousedown="dragResize('BottomLeft');"></div>
-		<div class="resizeGrip" id="resizeGripLeft" onmousedown="dragResize('Left');"></div>
+		<div id="topBar" onmousedown="dragMove();">
+			<table id = "topBarTable"><tr>
+				<td><button id="return" onclick="switchToMenu()">Return</button></td>
+				<td><input type="image" src="icons/minimize.png" onclick="minimizeToggle()"></input><input type="image" src="icons/x.png" id="close" onclick="closeWindow();"></input></td>
+			</table></tr>
+		</div>
 		<div id="content" onmousedown="dragMove();">
 			<div id="menu">
 				<div id="classSelection">
-					<table id = "classTable">
-						<tr><td> 
-							<input type="button" class="classButton" onclick="populateClassBuilds('WARRIOR')" id="warriorButton" value="Warrior"/>
-						</td></tr>
-						<tr><td> 
-							<input type="button" class="classButton" onclick="populateClassBuilds('GUARDIAN')" id="guardianButton" value="Guardian"/>
-						</td></tr>
-						<tr><td> 
-							<input type="button" class="classButton" onclick="populateClassBuilds('ENGINEER')" id="engineerButton" value="Engineer"/>
-						</td></tr>
-						<tr><td> 
-							<input type="button" class="classButton" onclick="populateClassBuilds('RANGER')" id="rangerButton" value="Ranger"/>
-						</td></tr>
-						<tr><td> 
-							<input type="button" class="classButton" onclick="populateClassBuilds('THIEF')" id="thiefButton" value="Thief"/>
-						</td></tr>
-						<tr><td> 
-							<input type="button" class="classButton" onclick="populateClassBuilds('ELEMENTALIST')" id="elementalistButton" value="Elementalist"/>
-						</td></tr>
-						<tr><td> 
-							<input type="button" class="classButton" onclick="populateClassBuilds('NECROMANCER')" id="necromancerButton" value="Necromancer"/>
-						</td></tr>
-						<tr><td> 
-							<input type="button" class="classButton" onclick="populateClassBuilds('MESMER')" id="mesmerButton" value="Mesmer"/>
-						</td></tr>
+					<table id = "classTable" class="alternateRows">
+						<tr><td class="className">Heavy</td></tr>
+						<tr><td class="classButton" onclick="populateClassBuilds('WARRIOR')" id="warriorButton">&nbsp&nbspWarrior</td></tr>
+						<tr><td class="classButton" onclick="populateClassBuilds('GUARDIAN')" id="guardianButton">&nbsp&nbspGuardian</td></tr>
+						<tr><td class="className">Medium</td></tr>
+						<tr><td class="classButton" onclick="populateClassBuilds('ENGINEER')" id="engineerButton">&nbsp&nbspEngineer</td></tr>
+						<tr><td class="classButton" onclick="populateClassBuilds('RANGER')" id="rangerButton">&nbsp&nbspRanger</td></tr>
+						<tr><td class="classButton" onclick="populateClassBuilds('THIEF')" id="thiefButton">&nbsp&nbspThief</td></tr>
+						<tr><td class="className">Light</td></tr>
+						<tr><td class="classButton" onclick="populateClassBuilds('ELEMENTALIST')" id="elementalistButton">&nbsp&nbspElementalist</td></tr>
+						<tr><td class="classButton" onclick="populateClassBuilds('NECROMANCER')" id="necromancerButton">&nbsp&nbspNecromancer</td></tr>
+						<tr><td class="classButton" onclick="populateClassBuilds('MESMER')" id="mesmerButton">&nbsp&nbspMesmer</td></tr>
 					</table>
 				</div>
 
 				<div id="buildSelection">
-					<table id="buildList">
+					<table id="buildList" class="alternateRows">
 						<!-- NEW BUILD LINK WILL BE INSERTED HERE UPON SELECTING A CLASS -->
 					</table>
 
 				</div>
 			</div>
-			<button id="close" onclick="closeWindow();">Close</button>
-		</div>
-		<div id="traitEditor">
-			HELLO FROM THE TRAIT EDITOR
+			<div id="traitEditor">
+				<table id="traitTable">
+				</table>
+				<div id="traitTools">
+					<button id="saveTraits" onClick="saveBuild()">Save</button>
+				</div>
+			</div>
 		</div>
 	</body>
 </html>

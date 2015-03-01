@@ -1,11 +1,27 @@
 $(document).ready(function(){
-
+	loadAllTraits();
+	$("#traitEditor").hide();
+	$("#return").hide();
     $("#menu").show();
-    $("#traitEditor").hide();
 });
 
 
+function switchToMenu() {
+	populateClassBuilds(window.className);
+	$("#traitEditor").hide();
+	$("#return").hide();
+	$("#menu").show();
+}
 
+function switchToTraits() {
+	$("#menu").hide();
+	$("#return").show();
+	$("#traitEditor").show();
+}
+
+function minimizeToggle() {
+	$("#content").toggle();
+}
 //Prettify template data
 function traitValueToRomanNumeral(value) {
 	//if 0, considered empty
@@ -48,9 +64,31 @@ function traitValueToRomanNumeral(value) {
 
 //Template Save management
 function saveAllTraits(templatesObject) {
+	if(!templatesObject.id) {
+		templatesObject.id = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    		var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+    		return v.toString(16);
+		});
+		//Add new build
+		window.templates.push(templatesObject);
+	} else {
+	//ID is not new. Check to make sure to save over old copy
+		for(i=0; i<window.templates.length; i++) {
+			if(window.templates[i].id === id) window.templates[i] = templatesObject;
+		}
+	}
+	//Save json object
 	localStorage.setItem('gw2templates', JSON.stringify(templatesObject));
 }
 
 function loadAllTraits() {
-	var templates = JSON.parse(localStorage.getItem('gw2templates'));
+	window.templates = JSON.parse(localStorage.getItem('gw2templates'));
+}
+
+//Grabs a template from the window object
+function loadById(id) {
+	if(!window.templates) return;
+	for(i=0; i<window.templates.length; i++) {
+		if(window.templates[i].id === id) return window.templates[i];
+	}
 }

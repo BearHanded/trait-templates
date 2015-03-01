@@ -1,0 +1,78 @@
+﻿html {
+	overflow: hidden;
+	height: 100%;
+	width: 100%;
+	color: #bdbec1;
+	font-family: Tahoma, Verdana, Segoe, sans-serif;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height:75px;
+}
+
+#topBar {
+	width:100%;
+	height: 25px;
+	position: absolute;
+	top: 0px;
+	background-color:#450701;
+	margin:0;
+	padding:0;
+}
+
+#topBarTable {
+	width:100%;
+	text-align: right;
+	margin:0;
+	padding:0;
+}
+
+.resizeGrip {
+	background: #FFAD5C;
+	position: absolute;
+}
+
+#content {
+	margin:0;
+	padding: 0;
+	background: #2E2219;
+	position: absolute;
+	margin-top: 25px;
+	width: 100%;
+	height: 100%
+}
+
+
+#resizeGripTopLeft {
+	width: 10px;
+	height: 10px;
+	top: 0;
+	left: 0;
+	cursor: nwse-resize;
+}
+
+#resizeGripBottomLeft {
+	width: 10px;
+	height: 10px;
+	bottom: 0;
+	left: 0;
+	cursor: nesw-resize;
+}
+
+#resizeGripTopRight {
+	width: 10px;
+	height: 10px;
+	top: 0;
+	right: 0;
+	cursor: nesw-resize;
+}
+
+#resizeGripBottomRight {
+	width: 10px;
+	height: 10px;
+	bottom: 0;
+	right: 0;
+	cursor: nwse-resize;
+}
