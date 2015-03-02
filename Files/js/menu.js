@@ -7,26 +7,40 @@
 //List the builds available for a class
 function populateClassBuilds(className){
 	window.className = className;
+	$('#classNameTop').text(className);
 	//Clear rows
 	$('#buildList').empty();
 	//load builds
 
 	//add in appropriate build ids
 	var html = '';
-	for(var i = 0; i < 4; i++) {
-            html += '<tr><td onClick=openBuild(' + i + ')>' + className + ' ' + i +  '</td></tr>';
-    }
+	if(window.templates && window.templates.length > 0)
+	{
+		for(var i = 0; i < window.templates.length; i++) {
+			//Filter by class
+			if(window.templates[i].className === window.className) {
+				html += '<tr><td onClick=openBuild("' + window.templates[i].id + '")>' + window.templates[i].buildName +  '</td></tr>';
+			}
+    	}
+	}
     html += '<tr><td id="newBuildLink" onClick=newBuild()>New Build +</td></tr>';
     $('#buildList').append(html);
 }
 
 //Open the build editor to the specified id
 function openBuild(buildId) {
-	newBuild();
+	//Set target in window
+	loadById(buildId);
+	//Prepare traits
+	initTraits();
+	//Switch divs
+	switchToTraits();
 }
 
 //Open an empty template page
 function newBuild() {
+	//Prepare clean build
+	newBuildObject();
 	initTraits();
 	//Prepare any data
 	switchToTraits();

@@ -22,22 +22,23 @@
 	<body>
 		<div id="topBar" onmousedown="dragMove();">
 			<table id = "topBarTable"><tr>
-				<td><button id="return" onclick="switchToMenu()">Return</button></td>
+				<td><span id="classNameTop" class="emphasis"></span></td>
+				<td><button id="return" class="lightBtn" onclick="switchToMenu()">Return</button></td>
 				<td><input type="image" src="icons/minimize.png" onclick="minimizeToggle()"></input><input type="image" src="icons/x.png" id="close" onclick="closeWindow();"></input></td>
 			</table></tr>
 		</div>
-		<div id="content" onmousedown="dragMove();">
+		<div id="content">
 			<div id="menu">
 				<div id="classSelection">
 					<table id = "classTable" class="alternateRows">
-						<tr><td class="className">Heavy</td></tr>
+						<tr><td class="emphasis">Heavy</td></tr>
 						<tr><td class="classButton" onclick="populateClassBuilds('WARRIOR')" id="warriorButton">&nbsp&nbspWarrior</td></tr>
 						<tr><td class="classButton" onclick="populateClassBuilds('GUARDIAN')" id="guardianButton">&nbsp&nbspGuardian</td></tr>
-						<tr><td class="className">Medium</td></tr>
+						<tr><td class="emphasis">Medium</td></tr>
 						<tr><td class="classButton" onclick="populateClassBuilds('ENGINEER')" id="engineerButton">&nbsp&nbspEngineer</td></tr>
 						<tr><td class="classButton" onclick="populateClassBuilds('RANGER')" id="rangerButton">&nbsp&nbspRanger</td></tr>
 						<tr><td class="classButton" onclick="populateClassBuilds('THIEF')" id="thiefButton">&nbsp&nbspThief</td></tr>
-						<tr><td class="className">Light</td></tr>
+						<tr><td class="emphasis">Light</td></tr>
 						<tr><td class="classButton" onclick="populateClassBuilds('ELEMENTALIST')" id="elementalistButton">&nbsp&nbspElementalist</td></tr>
 						<tr><td class="classButton" onclick="populateClassBuilds('NECROMANCER')" id="necromancerButton">&nbsp&nbspNecromancer</td></tr>
 						<tr><td class="classButton" onclick="populateClassBuilds('MESMER')" id="mesmerButton">&nbsp&nbspMesmer</td></tr>
@@ -52,10 +53,12 @@
 				</div>
 			</div>
 			<div id="traitEditor">
+				<input type="text" id="buildName" class="inputText" name="buildName">
+				<br>
 				<table id="traitTable">
 				</table>
 				<div id="traitTools">
-					<button id="saveTraits" onClick="saveBuild()">Save</button>
+					<button id="saveTraits" class="lightBtn" onClick="saveBuild()">Save Changes</button>
 				</div>
 			</div>
 		</div>

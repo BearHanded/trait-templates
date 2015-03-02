@@ -1,12 +1,17 @@
 $(document).ready(function(){
+	window.minimized = false;
+	window.templates = [];
+	window.displayContext='menu';
 	loadAllTraits();
 	$("#traitEditor").hide();
 	$("#return").hide();
     $("#menu").show();
+
 });
 
 
 function switchToMenu() {
+	window.displayContext='menu';
 	populateClassBuilds(window.className);
 	$("#traitEditor").hide();
 	$("#return").hide();
@@ -14,13 +19,30 @@ function switchToMenu() {
 }
 
 function switchToTraits() {
+	window.displayContext='traits';
 	$("#menu").hide();
 	$("#return").show();
 	$("#traitEditor").show();
 }
 
 function minimizeToggle() {
-	$("#content").toggle();
+		
+	//resize bar
+    if(!window.minimized){
+    	//hide content
+    	$("#content").hide();
+    	$("#classNameTop").hide();
+    	$("#return").hide();
+    	//toggle min on
+    	window.minimized = true;
+        $("#topBar").animate({width:"150px"},{duration: 400, queue: false });
+    } else {
+    	window.minimized = false;
+        $("#topBar").animate({width:"600px"},{duration: 400, queue: false });
+        $("#content").show();
+        $("#classNameTop").show();
+        if(window.displayContext!=='menu') $("#return").show();
+    };
 }
 //Prettify template data
 function traitValueToRomanNumeral(value) {
@@ -63,22 +85,28 @@ function traitValueToRomanNumeral(value) {
 
 
 //Template Save management
-function saveAllTraits(templatesObject) {
-	if(!templatesObject.id) {
-		templatesObject.id = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+function saveAllTraits(templateObject) {
+	if(!templateObject.id) {
+		templateObject.id = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
     		var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
     		return v.toString(16);
 		});
 		//Add new build
-		window.templates.push(templatesObject);
+		if(!window.templates) {
+			window.templates = [];
+			window.templates[0] = templateObject;
+		} else {
+			var length = window.templates.length;
+			window.templates[length] = templateObject;
+		}
 	} else {
 	//ID is not new. Check to make sure to save over old copy
 		for(i=0; i<window.templates.length; i++) {
-			if(window.templates[i].id === id) window.templates[i] = templatesObject;
+			if(window.templates[i].id === templateObject.id) window.templates[i] = templateObject;
 		}
 	}
 	//Save json object
-	localStorage.setItem('gw2templates', JSON.stringify(templatesObject));
+	localStorage.setItem('gw2templates', JSON.stringify(window.templates));
 }
 
 function loadAllTraits() {
@@ -89,6 +117,45 @@ function loadAllTraits() {
 function loadById(id) {
 	if(!window.templates) return;
 	for(i=0; i<window.templates.length; i++) {
-		if(window.templates[i].id === id) return window.templates[i];
+		//Matches, set as target and return
+		if(window.templates[i].id === id)  window.currentBuild = window.templates[i];
+		return;
+	}
+}
+
+/**
+ * Add a new build object to the window to manipulate
+ */
+function newBuildObject() {
+	window.currentBuild = {
+		className : window.className,
+		buildName : 'Build Name',
+		traits : {
+			line1 : {
+				adept : 0,
+				master : 0,
+				grandmaster : 0
+			},
+			line2 : {
+				adept : 0,
+				master : 0,
+				grandmaster : 0
+			},
+			line3 : {
+				adept : 0,
+				master : 0,
+				grandmaster : 0
+			},
+			line4 : {
+				adept : 0,
+				master : 0,
+				grandmaster : 0
+			},
+			line5 : {
+				adept : 0,
+				master : 0,
+				grandmaster : 0
+			}
+		}
 	}
 }

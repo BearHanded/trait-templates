@@ -10,3 +10,12 @@
 #traitTable tr:nth-child(4n+4), #traitTable tr:nth-child(4n+3) {
 	background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.5)), to(rgba(0, 0, 0, 0.2)));
 }
+
+.traitTotal {
+	font-family: Georgia, Times, “Times New Roman”, serif;
+	color: #FFFFFF;
+	font-size: 15;
+	padding: 5;
+	font-weight: bold;
+	text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.51);
+}
