@@ -3,8 +3,9 @@
  *	each option is given a class of adeptTrait/masterTrait/grandMasterTrait
  */
 function initTraits() {
-	$('#buildName').val(window.currentBuild.buildName);
 	$('#traitTable').empty();
+	$('#buildName').val(window.currentBuild.buildName);
+	$('#gameMode').val(window.currentBuild.gameMode);
 	//add in appropriate build ids
 	var html = '';
 
@@ -12,7 +13,7 @@ function initTraits() {
 	//init specific trait data per class
 	switch(window.className) {
 		case 'WARRIOR':
-			lineNames = ["Strength","Arms","Defence","Tactics","Disciple"];
+			lineNames = ["Strength","Arms","Defence","Tactics","Discipline"];
 			break;
 		case 'GUARDIAN':
 			lineNames = ["Zeal","Radiance","Valor","Honor","Virtues"];
@@ -41,17 +42,53 @@ function initTraits() {
 
 	for(var i = 0; i < 5; i++) {
 		var trueNum = i+1;
-		//Top Row 
-		html += '<tr id="traitLine'+ trueNum +'"><td class="emphasis">' + lineNames[i] + '</td><td class="tinyText">' 
+		//Set some data based on line
+		var traitValue = 0
+		if(i===0) {
+			traitValue = window.currentBuild.traits.line1.total;
+			if(!traitValue) {
+				traitValue = 0;
+				window.currentBuild.traits.line1.total = 0;
+			}
+		} else if (i===1) {
+			traitValue = window.currentBuild.traits.line2.total;
+			if(!traitValue) {
+				traitValue = 0;
+				window.currentBuild.traits.line2.total = 0;
+			}
+		} else if (i===2) {
+			traitValue = window.currentBuild.traits.line3.total;
+			if(!traitValue) {
+				traitValue = 0;
+				window.currentBuild.traits.line3.total = 0;
+			}
+		} else if (i===3) {
+			traitValue = window.currentBuild.traits.line4.total;
+			if(!traitValue) {
+				traitValue = 0;
+				window.currentBuild.traits.line4.total = 0;
+			}
+		} else if (i===4) {
+			traitValue = window.currentBuild.traits.line5.total;
+			if(!traitValue) {
+				traitValue = 0;
+				window.currentBuild.traits.line5.total = 0;
+			}
+		}
+
+		//Top Row spacing shenanigans
+		html += '<tr id="traitLine'+ trueNum +'"><td class="emphasis">' + lineNames[i] + '</td>'
+			+ '<td rowspan="2"><span class="traitTotal">' + traitValue + '</span></td>'
+			+ '<td class="tinyText">' 
         	+ getLineBonus(i, 1) + '</td>';
 		//Complete trait line
         html += '<td rowspan="2">' + getMinorSymbol() + '</td><td rowspan="2">' + generateTraitOptions(i, 0) + '</td><td rowspan="2">' 
         	+ getMinorSymbol() + '</td><td rowspan="2">' + generateTraitOptions(i, 1) + '</td><td rowspan="2">' 
         	+ getMinorSymbol() + '</td><td rowspan="2">' + generateTraitOptions(i, 2) + '</td></tr>';
         //Bottom Row
-        html += '<tr><td>' + '<button class="lightBtn">-</button>'
-        	+ '<button class="lightBtn">+</button>' 
-        	+ '<span class="traitTotal">0</span>' + '</td><td class="tinyText">' 
+        html += '<tr><td>' + '<button class="lightBtn traitOperation" onClick="removePoint(' + i +')">-</button>'
+        	+ '<button class="lightBtn traitOperation" onClick="addPoint(' + i +')">+</button>' 
+        	+ '</td><td class="tinyText">' 
         	+ getLineBonus(i, 2) + '</td></tr>';
     }
     $('#traitTable').append(html);
@@ -319,9 +356,142 @@ function updateTraitSelections() {
 	if(currentBuild.traits.line5.grandmaster) $("#traitLine5").find('.grandMasterTrait').val(currentBuild.traits.line5.grandmaster);
 }
 
+/**
+ * Add points to a line
+ */
+function addPoint(i){
+	if(getTotalPoints()>=14) return;
+	var traitLineNum = i+1;
+	var traitLineName = "#traitLine" + traitLineNum;
+	switch(i){
+		case 0:
+			if(window.currentBuild.traits.line1.total < 6) {
+				window.currentBuild.traits.line1.total++;
+				//set field
+				var traitLine = "#traitLine" + i;
+				$(traitLineName).find('.traitTotal').text(window.currentBuild.traits.line1.total);
+			}	
+			break;
+		case 1:
+			if(window.currentBuild.traits.line2.total < 6) {
+				window.currentBuild.traits.line2.total++;
+				//set field
+				var traitLine = "#traitLine" + i;
+				$(traitLineName).find('.traitTotal').text(window.currentBuild.traits.line2.total);
+			}	
+			break;
+		case 2:
+			if(window.currentBuild.traits.line3.total < 6) {
+				window.currentBuild.traits.line3.total++;
+				//set field
+				var traitLine = "#traitLine" + i;
+				$(traitLineName).find('.traitTotal').text(window.currentBuild.traits.line3.total);
+			}	
+			break;
+		case 3:
+			if(window.currentBuild.traits.line4.total < 6) {
+				window.currentBuild.traits.line4.total++;
+				//set field
+				var traitLine = "#traitLine" + i;
+				$(traitLineName).find('.traitTotal').text(window.currentBuild.traits.line4.total);
+			}	
+			break;
+		case 4:
+			if(window.currentBuild.traits.line5.total < 6) {
+				window.currentBuild.traits.line5.total++;
+				//set field
+				var traitLine = "#traitLine" + i;
+				$(traitLineName).find('.traitTotal').text(window.currentBuild.traits.line5.total);
+			}	
+			break;
+		default:
+			return;
+	}
+}
+
+ /**
+ *	Remove points from a line 
+ */
+
+function removePoint(i){
+	var traitLineNum = i+1;
+	var traitLineName = "#traitLine" + traitLineNum;
+	switch(i){
+		case 0:
+			if(window.currentBuild.traits.line1.total > 0) {
+				window.currentBuild.traits.line1.total--;
+				//set field
+				var traitLine = "#traitLine" + i;
+				$(traitLineName).find('.traitTotal').text(window.currentBuild.traits.line1.total);
+			}	
+			break;
+		case 1:
+			if(window.currentBuild.traits.line2.total > 0) {
+				window.currentBuild.traits.line2.total--;
+				//set field
+				var traitLine = "#traitLine" + i;
+				$(traitLineName).find('.traitTotal').text(window.currentBuild.traits.line2.total);
+			}	
+			break;
+		case 2:
+			if(window.currentBuild.traits.line3.total > 0) {
+				window.currentBuild.traits.line3.total--;
+				//set field
+				var traitLine = "#traitLine" + i;
+				$(traitLineName).find('.traitTotal').text(window.currentBuild.traits.line3.total);
+			}	
+			break;
+		case 3:
+			if(window.currentBuild.traits.line4.total > 0) {
+				window.currentBuild.traits.line4.total--;
+				//set field
+				var traitLine = "#traitLine" + i;
+				$(traitLineName).find('.traitTotal').text(window.currentBuild.traits.line4.total);
+			}	
+			break;
+		case 4:
+			if(window.currentBuild.traits.line5.total > 0) {
+				window.currentBuild.traits.line5.total--;
+				//set field
+				var traitLine = "#traitLine" + i;
+				$(traitLineName).find('.traitTotal').text(window.currentBuild.traits.line5.total);
+			}	
+			break;
+		default:
+			return;
+	}
+}
+
+
+/**
+ *	Returns the current number of points spend in the build
+ **/
+function getTotalPoints() {
+	var totalPoints = window.currentBuild.traits.line1.total
+		+ window.currentBuild.traits.line2.total
+		+ window.currentBuild.traits.line3.total
+		+ window.currentBuild.traits.line4.total
+		+ window.currentBuild.traits.line5.total;
+
+		return totalPoints;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
 function saveBuild(){
 	//Save build name
 	window.currentBuild.buildName = $("#buildName").val();
+	window.currentBuild.gameMode = $("#gameMode").val();
 
 	//Scrape together traitLines
 	window.currentBuild.traits.line1.adept = $("#traitLine1").find('.adeptTrait').val();

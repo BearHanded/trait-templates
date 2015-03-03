@@ -26,6 +26,21 @@
 	color: white;
 }
 
+
+#classTable {
+	padding:0px; 
+	border-width:1px; 
+	border-radius:1px; 
+	border-style:solid; 
+	border-color:rgba(0, 0, 0, 1); 
+	background-color:rgba(0, 0, 0, 0.7); 
+}
+
 .alternateRows tr:nth-child(odd) {
 	background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.5)), to(rgba(0, 0, 0, 0.2)));
+}
+
+.gameModeDisplay {
+	float: right;
+	font-style: italic;
 }

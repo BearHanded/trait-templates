@@ -19,7 +19,17 @@ function populateClassBuilds(className){
 		for(var i = 0; i < window.templates.length; i++) {
 			//Filter by class
 			if(window.templates[i].className === window.className) {
-				html += '<tr><td onClick=openBuild("' + window.templates[i].id + '")>' + window.templates[i].buildName +  '</td></tr>';
+				var gameModeName = '';
+				if(window.templates[i].gameMode === 0) {
+					gameModeName = 'WvW';
+				} else if (window.templates[i].gameMode === 1){
+					gameModeName = 'PvP';
+				} else if (window.templates[i].gameMode === 2){
+					gameModeName = 'PvE';
+				}
+
+				html += '<tr><td onClick=openBuild("' + window.templates[i].id + '")>' + window.templates[i].buildName 
+				+ '</td></tr>';
 			}
     	}
 	}

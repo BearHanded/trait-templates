@@ -3,6 +3,7 @@ $(document).ready(function(){
 	window.templates = [];
 	window.displayContext='menu';
 	loadAllTraits();
+	$("#buildDetails").hide();
 	$("#traitEditor").hide();
 	$("#return").hide();
     $("#menu").show();
@@ -14,6 +15,7 @@ function switchToMenu() {
 	window.displayContext='menu';
 	populateClassBuilds(window.className);
 	$("#traitEditor").hide();
+	$("#buildDetails").hide();
 	$("#return").hide();
 	$("#menu").show();
 }
@@ -22,6 +24,7 @@ function switchToTraits() {
 	window.displayContext='traits';
 	$("#menu").hide();
 	$("#return").show();
+	$("#buildDetails").show();
 	$("#traitEditor").show();
 }
 
@@ -35,10 +38,10 @@ function minimizeToggle() {
     	$("#return").hide();
     	//toggle min on
     	window.minimized = true;
-        $("#topBar").animate({width:"150px"},{duration: 400, queue: false });
+        $("#topBar").animate({marginLeft:450,width:150},{duration: 400, queue: false });
     } else {
     	window.minimized = false;
-        $("#topBar").animate({width:"600px"},{duration: 400, queue: false });
+        $("#topBar").animate({width:600, marginLeft: 0},{duration: 400, queue: false });
         $("#content").show();
         $("#classNameTop").show();
         if(window.displayContext!=='menu') $("#return").show();
@@ -130,28 +133,34 @@ function newBuildObject() {
 	window.currentBuild = {
 		className : window.className,
 		buildName : 'Build Name',
+		gameMode : 0,
 		traits : {
 			line1 : {
+				total : 0,
 				adept : 0,
 				master : 0,
 				grandmaster : 0
 			},
 			line2 : {
+				total : 0,
 				adept : 0,
 				master : 0,
 				grandmaster : 0
 			},
 			line3 : {
+				total : 0,
 				adept : 0,
 				master : 0,
 				grandmaster : 0
 			},
 			line4 : {
+				total : 0,
 				adept : 0,
 				master : 0,
 				grandmaster : 0
 			},
 			line5 : {
+				total : 0,
 				adept : 0,
 				master : 0,
 				grandmaster : 0
