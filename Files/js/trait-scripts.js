@@ -75,7 +75,20 @@ function initTraits() {
 				window.currentBuild.traits.line5.total = 0;
 			}
 		}
+		var subtractionClass = "lightBtn";
+		var additionClass = 'lightBtn';
 
+		//Determine active buttons on load
+		if(getTotalPoints() >= 14) {
+			additionClass = 'inactiveButton';
+		} else {
+			if(traitValue === 0) {
+				subtractionClass = "inactiveButton";
+			} else if(traitValue === 6) {
+				additionClass = "inactiveButton";
+			}
+		}
+		 
 		//Top Row spacing shenanigans
 		html += '<tr id="traitLine'+ trueNum +'"><td class="emphasis">' + lineNames[i] + '</td>'
 			+ '<td rowspan="2"><span class="traitTotal">' + traitValue + '</span></td>'
@@ -86,8 +99,8 @@ function initTraits() {
         	+ getMinorSymbol() + '</td><td rowspan="2">' + generateTraitOptions(i, 1) + '</td><td rowspan="2">' 
         	+ getMinorSymbol() + '</td><td rowspan="2">' + generateTraitOptions(i, 2) + '</td></tr>';
         //Bottom Row
-        html += '<tr><td>' + '<button class="lightBtn traitOperation" onClick="removePoint(' + i +')">-</button>'
-        	+ '<button class="lightBtn traitOperation" onClick="addPoint(' + i +')">+</button>' 
+        html += '<tr id="traitOperationLine'+ trueNum +'"><td>' + '<button class="' + subtractionClass + ' traitOperation traitSubtraction" onClick="removePoint(' + i +')">-</button>'
+        	+ '<button class="'+ additionClass + ' traitOperation traitAddition" onClick="addPoint(' + i +')">+</button>' 
         	+ '</td><td class="tinyText">' 
         	+ getLineBonus(i, 2) + '</td></tr>';
     }
@@ -144,7 +157,7 @@ function generateTraitOptions(traitLine, traitLevel) {
  */
 function getMinorSymbol() {
 	var symbolPath = '';
-	return 'mnr';
+	return '<span class="hb hb-xs">x</i></td>';
 	switch(window.className) {
 		case 'WARRIOR':
 			
@@ -360,9 +373,12 @@ function updateTraitSelections() {
  * Add points to a line
  */
 function addPoint(i){
-	if(getTotalPoints()>=14) return;
+	var currentTotal = getTotalPoints();
+	if(currentTotal>=14) return;
+	currentTotal ++;
 	var traitLineNum = i+1;
 	var traitLineName = "#traitLine" + traitLineNum;
+	var traitOperationLine = "#traitOperationLine" + traitLineNum;
 	switch(i){
 		case 0:
 			if(window.currentBuild.traits.line1.total < 6) {
@@ -370,7 +386,19 @@ function addPoint(i){
 				//set field
 				var traitLine = "#traitLine" + i;
 				$(traitLineName).find('.traitTotal').text(window.currentBuild.traits.line1.total);
-			}	
+
+				//Set operable/inoperable fields
+				if(window.currentBuild.traits.line1.total === 1) {
+					//trait line 0 ->, set operable
+					$(traitOperationLine).find('.traitSubtraction').addClass("lightBtn");
+					$(traitOperationLine).find('.traitSubtraction').removeClass("inactiveButton");
+				} else if(window.currentBuild.traits.line1.total === 6) {
+					//Trait line maxed, set addition inoberable
+					$(traitOperationLine).find('.traitAddition').addClass("inactiveButton");
+					$(traitOperationLine).find('.traitAddition').removeClass("lightBtn");
+				}
+				//TODO: Add operable traits
+			} else return;
 			break;
 		case 1:
 			if(window.currentBuild.traits.line2.total < 6) {
@@ -378,7 +406,18 @@ function addPoint(i){
 				//set field
 				var traitLine = "#traitLine" + i;
 				$(traitLineName).find('.traitTotal').text(window.currentBuild.traits.line2.total);
-			}	
+
+				//Set operable/inoperable fields
+				if(window.currentBuild.traits.line2.total === 1) {
+					//trait line 0 ->, set operable
+					$(traitOperationLine).find('.traitSubtraction').addClass("lightBtn");
+					$(traitOperationLine).find('.traitSubtraction').removeClass("inactiveButton");
+				} else if(window.currentBuild.traits.line2.total === 6) {
+					//Trait line maxed, set addition inoberable
+					$(traitOperationLine).find('.traitAddition').addClass("inactiveButton");
+					$(traitOperationLine).find('.traitAddition').removeClass("lightBtn");
+				}
+			} else return;
 			break;
 		case 2:
 			if(window.currentBuild.traits.line3.total < 6) {
@@ -386,7 +425,18 @@ function addPoint(i){
 				//set field
 				var traitLine = "#traitLine" + i;
 				$(traitLineName).find('.traitTotal').text(window.currentBuild.traits.line3.total);
-			}	
+
+				//Set operable/inoperable fields
+				if(window.currentBuild.traits.line3.total === 1) {
+					//trait line 0 ->, set operable
+					$(traitOperationLine).find('.traitSubtraction').addClass("lightBtn");
+					$(traitOperationLine).find('.traitSubtraction').removeClass("inactiveButton");
+				} else if(window.currentBuild.traits.line3.total === 6) {
+					//Trait line maxed, set addition inoberable
+					$(traitOperationLine).find('.traitAddition').addClass("inactiveButton");
+					$(traitOperationLine).find('.traitAddition').removeClass("lightBtn");
+				}
+			} else return;
 			break;
 		case 3:
 			if(window.currentBuild.traits.line4.total < 6) {
@@ -394,7 +444,18 @@ function addPoint(i){
 				//set field
 				var traitLine = "#traitLine" + i;
 				$(traitLineName).find('.traitTotal').text(window.currentBuild.traits.line4.total);
-			}	
+
+				//Set operable/inoperable fields
+				if(window.currentBuild.traits.line4.total === 1) {
+					//trait line 0 ->, set operable
+					$(traitOperationLine).find('.traitSubtraction').addClass("lightBtn");
+					$(traitOperationLine).find('.traitSubtraction').removeClass("inactiveButton");
+				} else if(window.currentBuild.traits.line4.total === 6) {
+					//Trait line maxed, set addition inoberable
+					$(traitOperationLine).find('.traitAddition').addClass("inactiveButton");
+					$(traitOperationLine).find('.traitAddition').removeClass("lightBtn");
+				}
+			} else return;
 			break;
 		case 4:
 			if(window.currentBuild.traits.line5.total < 6) {
@@ -402,10 +463,30 @@ function addPoint(i){
 				//set field
 				var traitLine = "#traitLine" + i;
 				$(traitLineName).find('.traitTotal').text(window.currentBuild.traits.line5.total);
-			}	
+
+				//Set operable/inoperable fields
+				if(window.currentBuild.traits.line5.total === 1) {
+					//trait line 0 ->, set operable
+					$(traitOperationLine).find('.traitSubtraction').addClass("lightBtn");
+					$(traitOperationLine).find('.traitSubtraction').removeClass("inactiveButton");
+				} else if(window.currentBuild.traits.line5.total === 6) {
+					//Trait line maxed, set addition inoberable
+					$(traitOperationLine).find('.traitAddition').addClass("inactiveButton");
+					$(traitOperationLine).find('.traitAddition').removeClass("lightBtn");
+				}
+			} else return;
 			break;
 		default:
 			return;
+	}
+
+	//Deal with min/max total conditions
+	
+
+	if(currentTotal === 14) {
+		//Adding a trait maxes allocated points
+		$(".traitAddition").addClass("inactiveButton");
+		$(".traitAddition").removeClass("lightBtn");
 	}
 }
 
@@ -414,8 +495,12 @@ function addPoint(i){
  */
 
 function removePoint(i){
+	var currentTotal = getTotalPoints();
+	if(currentTotal===0) return;
+	currentTotal--;
 	var traitLineNum = i+1;
 	var traitLineName = "#traitLine" + traitLineNum;
+	var traitOperationLine = "#traitOperationLine" + traitLineNum;
 	switch(i){
 		case 0:
 			if(window.currentBuild.traits.line1.total > 0) {
@@ -423,7 +508,18 @@ function removePoint(i){
 				//set field
 				var traitLine = "#traitLine" + i;
 				$(traitLineName).find('.traitTotal').text(window.currentBuild.traits.line1.total);
-			}	
+
+				//Set operable/inoperable fields
+				if(window.currentBuild.traits.line1.total === 0) {
+					//Trait line 0, set subtraction inoberable
+					$(traitOperationLine).find('.traitSubtraction').addClass("inactiveButton");
+					$(traitOperationLine).find('.traitSubtraction').removeClass("lightBtn");
+				} else if(window.currentBuild.traits.line1.total < 6) {
+					//Trait line 0, set subtraction inoberable
+					$(traitOperationLine).find('.traitAddition').addClass("lightBtn");
+					$(traitOperationLine).find('.traitAddition').removeClass("inactiveButton");
+				}
+			} else return;
 			break;
 		case 1:
 			if(window.currentBuild.traits.line2.total > 0) {
@@ -431,7 +527,17 @@ function removePoint(i){
 				//set field
 				var traitLine = "#traitLine" + i;
 				$(traitLineName).find('.traitTotal').text(window.currentBuild.traits.line2.total);
-			}	
+				//Set operable/inoperable fields
+				if(window.currentBuild.traits.line2.total === 0) {
+					//Trait line 0, set subtraction inoberable
+					$(traitOperationLine).find('.traitSubtraction').addClass("inactiveButton");
+					$(traitOperationLine).find('.traitSubtraction').removeClass("lightBtn");
+				} else if(window.currentBuild.traits.line2.total < 6) {
+					//Trait line 0, set subtraction inoberable
+					$(traitOperationLine).find('.traitAddition').addClass("lightBtn");
+					$(traitOperationLine).find('.traitAddition').removeClass("inactiveButton");
+				}
+			} else return;
 			break;
 		case 2:
 			if(window.currentBuild.traits.line3.total > 0) {
@@ -439,7 +545,17 @@ function removePoint(i){
 				//set field
 				var traitLine = "#traitLine" + i;
 				$(traitLineName).find('.traitTotal').text(window.currentBuild.traits.line3.total);
-			}	
+				//Set operable/inoperable fields
+				if(window.currentBuild.traits.line3.total === 0) {
+					//Trait line 0, set subtraction inoberable
+					$(traitOperationLine).find('.traitSubtraction').addClass("inactiveButton");
+					$(traitOperationLine).find('.traitSubtraction').removeClass("lightBtn");
+				} else if(window.currentBuild.traits.line3.total < 6) {
+					//Trait line 0, set subtraction inoberable
+					$(traitOperationLine).find('.traitAddition').addClass("lightBtn");
+					$(traitOperationLine).find('.traitAddition').removeClass("inactiveButton");
+				}
+			} else return;
 			break;
 		case 3:
 			if(window.currentBuild.traits.line4.total > 0) {
@@ -447,7 +563,17 @@ function removePoint(i){
 				//set field
 				var traitLine = "#traitLine" + i;
 				$(traitLineName).find('.traitTotal').text(window.currentBuild.traits.line4.total);
-			}	
+				//Set operable/inoperable fields
+				if(window.currentBuild.traits.line4.total === 0) {
+					//Trait line 0, set subtraction inoberable
+					$(traitOperationLine).find('.traitSubtraction').addClass("inactiveButton");
+					$(traitOperationLine).find('.traitSubtraction').removeClass("lightBtn");
+				} else if(window.currentBuild.traits.line4.total < 6) {
+					//Trait line 0, set subtraction inoberable
+					$(traitOperationLine).find('.traitAddition').addClass("lightBtn");
+					$(traitOperationLine).find('.traitAddition').removeClass("inactiveButton");
+				}
+			} else return;
 			break;
 		case 4:
 			if(window.currentBuild.traits.line5.total > 0) {
@@ -455,10 +581,30 @@ function removePoint(i){
 				//set field
 				var traitLine = "#traitLine" + i;
 				$(traitLineName).find('.traitTotal').text(window.currentBuild.traits.line5.total);
-			}	
+				//Set operable/inoperable fields
+				if(window.currentBuild.traits.line5.total === 0) {
+					//Trait line 0, set subtraction inoberable
+					$(traitOperationLine).find('.traitSubtraction').addClass("inactiveButton");
+					$(traitOperationLine).find('.traitSubtraction').removeClass("lightBtn");
+				} else if(window.currentBuild.traits.line5.total < 6) {
+					//Trait line 0, set subtraction inoberable
+					$(traitOperationLine).find('.traitAddition').addClass("lightBtn");
+					$(traitOperationLine).find('.traitAddition').removeClass("inactiveButton");
+				}
+			} else return;
 			break;
 		default:
 			return;
+	}
+
+	if(currentTotal === 0) {
+		//All subtraction now inactive
+		$(".traitSubtraction").removeClass("lightBtn");
+		$(".traitSubtraction").addClass("inactiveButton");
+	} else if(currentTotal === 13) {
+		//Addition buttons active again after being maxed
+		$(".traitAddition").addClass("lightBtn");
+		$(".traitAddition").removeClass("inactiveButton");
 	}
 }
 
