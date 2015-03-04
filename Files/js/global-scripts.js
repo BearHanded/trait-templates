@@ -38,7 +38,7 @@ function minimizeToggle() {
     	$("#return").hide();
     	//toggle min on
     	window.minimized = true;
-        $("#topBar").animate({marginLeft:450,width:150},{duration: 400, queue: false });
+        $("#topBar").animate({marginLeft:425,width:175},{duration: 400, queue: false });
     } else {
     	window.minimized = false;
         $("#topBar").animate({width:600, marginLeft: 0},{duration: 400, queue: false });
@@ -114,6 +114,7 @@ function saveAllTraits(templateObject) {
 
 function loadAllTraits() {
 	window.templates = JSON.parse(localStorage.getItem('gw2templates'));
+	return true;
 }
 
 //Grabs a template from the window object
@@ -121,9 +122,12 @@ function loadById(id) {
 	if(!window.templates) return;
 	for(i=0; i<window.templates.length; i++) {
 		//Matches, set as target and return
-		if(window.templates[i].id === id)  window.currentBuild = window.templates[i];
-		return;
+		if(window.templates[i].id === id) {
+			window.currentBuild = window.templates[i];
+			return true;
+		}
 	}
+	return false;
 }
 
 /**
@@ -166,5 +170,5 @@ function newBuildObject() {
 				grandmaster : 0
 			}
 		}
-	}
+	};
 }

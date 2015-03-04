@@ -30,11 +30,20 @@ html, body {
 	padding:0;
 }
 
+#classNameSlot {
+	text-align: left;
+}
+
+#appIcon {
+	text-align: left;
+}
 
 #content {
 	margin:0;
 	padding: 0;
-	background: #2E2219;
+	/* background: #2E2219; */
+	background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("images/guildwars2-25.jpg");
+	background-size: 100%;
 	position: absolute;
 	margin-top: 25px;
 	width: 100%;
@@ -129,6 +138,14 @@ html, body {
 
 .tinyText {
 	font-size:10px;
+}
+
+.activeIcon {
+	color: #bdbec1;
+}
+
+.activeIcon:hover {
+	color: white;
 }
 
 #buildDetails {

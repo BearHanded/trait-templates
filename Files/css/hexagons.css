@@ -220,6 +220,21 @@ inv 		= Inverse Behaver of buttons
 	width:32px; 
 }
 
+/* -------CUSTOM SIZE------
+-------------------------------------------------*/
+.hb-xxs {
+	line-height: 9.5px;
+	font-size: 9.5px;
+	margin: 4.5px 0px; /* Original output, margin 0 of the button */ 
+	/*margin: 33.5px 15px;*/ /* New output, margin 15px of the button,  9.5 + 15 = 24.5 */ 
+}
+.hb-xxs ,
+.hb-xxs:before ,
+.hb-xxs:after {
+	height:9.5px;
+	width:16px; 
+}
+
 /* 2.5 - Extra Small Button style  End
 -------------------------------------------------*/
 
@@ -305,10 +320,10 @@ inv 		= Inverse Behaver of buttons
 .hb,
 .hb:before,
 .hb:after {
-	background-color: #2c3e50;  /*  Default background color  */ 
-	border-left:1px solid #2c3e50;
-	border-right:1px solid #2c3e50;
-	color: #2ecc71; /* Default font color */
+	background-color: #fae5b1;  /*  Default background color  */ 
+	border-left:1px solid #000000;
+	border-right:1px solid #000000;
+	color: #000000; /* Default font color */
 }
 /* 5.1 - Default Colors End
 -------------------------------------------------*/
@@ -319,10 +334,10 @@ inv 		= Inverse Behaver of buttons
 .hb:hover,
 .hb:hover:before,
 .hb:hover:after {
-	background: transparent;  
-	border-left:1px solid #2ecc71;
-	border-right:1px solid #2ecc71;  
-	color: #2ecc71; /* Default hover font color */
+	background-color: #faeccd;  
+	border-left:1px solid #000000;
+	border-right:1px solid #000000;  
+	color: #000000; /* Default hover font color */
 }
 /* 5.2 - Default hover colors end
 -------------------------------------------------*/
@@ -331,14 +346,10 @@ inv 		= Inverse Behaver of buttons
 
 /* 5.3 - Custom Button colors
 -------------------------------------------------*/
-.hb-custom,
-.hb-custom:before,
-.hb-custom:after {
-	background: #f39c12 !important;  /*  Custom background color  */
-	color: white!important; /* Custom font color */
-	/*font-size:20px;*/ /* Custom font size */
-	border-left:1px solid #f39c12 !important;;
-	border-right:1px solid #f39c12 !important;; 
+.hb-inactiveOverride,
+.hb-inactiveOverride:before,
+.hb-inactiveOverride:after {
+	background: #565656 !important;  /*  Custom background color  */
 }
 /* 5.3 - Custom Button colors End
 -------------------------------------------------*/
@@ -347,9 +358,9 @@ inv 		= Inverse Behaver of buttons
 
 /* 5.4 - Custom Button hover colors
 -------------------------------------------------*/
-.hb-custom:hover,
-.hb-custom:hover:before,
-.hb-custom:hover:after {
+.hb-inactiveOverride:hover,
+.hb-inactiveOverride:hover:before,
+.hb-inactiveOverride:hover:after {
 	background: #f1c40f !important;  
 	border-left:1px solid #f1c40f !important;;
 	border-right:1px solid #f1c40f !important;; 

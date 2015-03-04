@@ -4,8 +4,7 @@
  */
 function initTraits() {
 	$('#traitTable').empty();
-	$('#buildName').val(window.currentBuild.buildName);
-	$('#gameMode').val(window.currentBuild.gameMode);
+
 	//add in appropriate build ids
 	var html = '';
 
@@ -39,7 +38,10 @@ function initTraits() {
 		default:
 	}
 
-
+	//Get build data
+		$('#buildName').val(window.currentBuild.buildName);
+		$('#gameMode').val(window.currentBuild.gameMode);
+		
 	for(var i = 0; i < 5; i++) {
 		var trueNum = i+1;
 		//Set some data based on line
@@ -78,6 +80,7 @@ function initTraits() {
 		var subtractionClass = "lightBtn";
 		var additionClass = 'lightBtn';
 
+
 		//Determine active buttons on load
 		if(getTotalPoints() >= 14) {
 			additionClass = 'inactiveButton';
@@ -95,9 +98,9 @@ function initTraits() {
 			+ '<td class="tinyText">' 
         	+ getLineBonus(i, 1) + '</td>';
 		//Complete trait line
-        html += '<td rowspan="2">' + getMinorSymbol() + '</td><td rowspan="2">' + generateTraitOptions(i, 0) + '</td><td rowspan="2">' 
-        	+ getMinorSymbol() + '</td><td rowspan="2">' + generateTraitOptions(i, 1) + '</td><td rowspan="2">' 
-        	+ getMinorSymbol() + '</td><td rowspan="2">' + generateTraitOptions(i, 2) + '</td></tr>';
+        html += '<td rowspan="2">' + getMinorSymbol(traitValue, 1) + '</td><td rowspan="2">' + generateTraitOptions(i, 0) + '</td><td rowspan="2">' 
+        	+ getMinorSymbol(traitValue, 2) + '</td><td rowspan="2">' + generateTraitOptions(i, 1) + '</td><td rowspan="2">' 
+        	+ getMinorSymbol(traitValue, 3) + '</td><td rowspan="2">' + generateTraitOptions(i, 2) + '</td></tr>';
         //Bottom Row
         html += '<tr id="traitOperationLine'+ trueNum +'"><td>' + '<button class="' + subtractionClass + ' traitOperation traitSubtraction" onClick="removePoint(' + i +')">-</button>'
         	+ '<button class="'+ additionClass + ' traitOperation traitAddition" onClick="addPoint(' + i +')">+</button>' 
@@ -155,37 +158,19 @@ function generateTraitOptions(traitLine, traitLevel) {
 /**
  * Returns the generated icon for locked traits modifiable if locked
  */
-function getMinorSymbol() {
-	var symbolPath = '';
-	return '<span class="hb hb-xs">x</i></td>';
-	switch(window.className) {
-		case 'WARRIOR':
-			
-			break;
-		case 'GUARDIAN':
+function getMinorSymbol(allocatedPoints, minorTraitNumber) {
+	var activeIcon = "fa fa-dot-circle-o";
+	var inactiveIcon = "fa fa-circle-o";
+	var inactiveHexOverride = " hb-inactiveOverride";
+	var usedIcon = inactiveIcon;	//Default inactive
+	
+	var pointsRequired = (minorTraitNumber*2)-1;	//The amount of allocated points required to make active
+	if(allocatedPoints >= pointsRequired){
+		usedIcon = activeIcon;
+		inactiveHexOverride = "";	//clear inactive override
+	} 
 
-			break;
-		case 'ENGINEER':
-
-			break;
-		case 'RANGER':
-
-			break;
-		case 'THIEF':
-
-			break;
-		case 'ELEMENTALIST':
-
-			break;
-		case 'NECROMANCER':
-
-			break;
-		case 'MESMER':
-
-			break;
-		default:
-	}
-	return symbolPath;
+	return '<span class="hb hb-xxs' + inactiveHexOverride + '"><i class="'+ usedIcon+ '"></i></span>';
 }
 
 /**

@@ -40,7 +40,8 @@ function populateClassBuilds(className){
 //Open the build editor to the specified id
 function openBuild(buildId) {
 	//Set target in window
-	loadById(buildId);
+	success = loadById(buildId);
+
 	//Prepare traits
 	initTraits();
 	//Switch divs
