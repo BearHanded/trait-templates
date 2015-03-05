@@ -98,9 +98,9 @@ function initTraits() {
 			+ '<td class="tinyText">' 
         	+ getLineBonus(i, 1) + '</td>';
 		//Complete trait line
-        html += '<td rowspan="2">' + getMinorSymbol(traitValue, 1) + '</td><td rowspan="2">' + generateTraitOptions(i, 0) + '</td><td rowspan="2">' 
-        	+ getMinorSymbol(traitValue, 2) + '</td><td rowspan="2">' + generateTraitOptions(i, 1) + '</td><td rowspan="2">' 
-        	+ getMinorSymbol(traitValue, 3) + '</td><td rowspan="2">' + generateTraitOptions(i, 2) + '</td></tr>';
+        html += '<td rowspan="2">' + getMinorSymbol(traitValue, 1) + '</td><td rowspan="2">' + generateTraitOptions(i, 0, traitValue) + '</td><td rowspan="2">' 
+        	+ getMinorSymbol(traitValue, 2) + '</td><td rowspan="2">' + generateTraitOptions(i, 1, traitValue) + '</td><td rowspan="2">' 
+        	+ getMinorSymbol(traitValue, 3) + '</td><td rowspan="2">' + generateTraitOptions(i, 2, traitValue) + '</td></tr>';
         //Bottom Row
         html += '<tr id="traitOperationLine'+ trueNum +'"><td>' + '<button class="' + subtractionClass + ' traitOperation traitSubtraction" onClick="removePoint(' + i +')">-</button>'
         	+ '<button class="'+ additionClass + ' traitOperation traitAddition" onClick="addPoint(' + i +')">+</button>' 
@@ -116,23 +116,31 @@ function initTraits() {
 /**
  *	Generates the html for each set of trait options. The option is given a class of adeptTrait/masterTrait/grandMasterTrait
  */
-function generateTraitOptions(traitLine, traitLevel) {
+function generateTraitOptions(traitLine, traitLevel, traitValue) {
 	var traitOptions = '';
 	var traitHtmlClass = '';
+	var inactiveTrait = "inputSelectionInactive";
 	switch(traitLevel){	
 		case 0:
-			traitHtmlClass = 'class="adeptTrait inputSelection"';
+			if(traitValue>=2) inactiveTrait = ""; 
+			traitHtmlClass = 'class="adeptTrait traitDescription inputSelection '+ inactiveTrait + '"';
 			break;
 		case 1:
-			traitHtmlClass = 'class="masterTrait inputSelection"';
+			if(traitValue>=4) inactiveTrait = "";
+			traitHtmlClass = 'class="masterTrait traitDescription inputSelection '+ inactiveTrait + '"';
 			break;
 		case 2:
-			traitHtmlClass = 'class="grandMasterTrait inputSelection"';
+			if(traitValue===6) inactiveTrait = "";
+			traitHtmlClass = 'class="grandMasterTrait traitDescription inputSelection '+ inactiveTrait + '"';
 			break;
 		default:
 	}
 
-	traitOptions += '<select ' + traitHtmlClass + '>'
+	//Append tooltip title to class
+
+
+	//Generate options
+	traitOptions += '<select ' + traitHtmlClass + ' ' + generateTooltip(window.className, traitLine, traitLevel) + '>'
 		+'<option value="0" selected="selected"> </option>'
 		+'<option value=1>I</option>'
 		+'<option value=2>II</option>'
@@ -161,7 +169,8 @@ function generateTraitOptions(traitLine, traitLevel) {
 function getMinorSymbol(allocatedPoints, minorTraitNumber) {
 	var activeIcon = "fa fa-dot-circle-o";
 	var inactiveIcon = "fa fa-circle-o";
-	var inactiveHexOverride = " hb-inactiveOverride";
+	var inactiveHexOverride = "hb-inactiveOverride";
+	var minorClass = "minorTrait" + minorTraitNumber;
 	var usedIcon = inactiveIcon;	//Default inactive
 	
 	var pointsRequired = (minorTraitNumber*2)-1;	//The amount of allocated points required to make active
@@ -170,7 +179,7 @@ function getMinorSymbol(allocatedPoints, minorTraitNumber) {
 		inactiveHexOverride = "";	//clear inactive override
 	} 
 
-	return '<span class="hb hb-xxs' + inactiveHexOverride + '"><i class="'+ usedIcon+ '"></i></span>';
+	return '<span class="hb hb-xxs ' + inactiveHexOverride + ' ' + minorClass + '"><i class="'+ usedIcon+ '"></i></span>';
 }
 
 /**
@@ -370,6 +379,7 @@ function addPoint(i){
 				window.currentBuild.traits.line1.total++;
 				//set field
 				var traitLine = "#traitLine" + i;
+				lineValue = window.currentBuild.traits.line1.total;
 				$(traitLineName).find('.traitTotal').text(window.currentBuild.traits.line1.total);
 
 				//Set operable/inoperable fields
@@ -390,6 +400,7 @@ function addPoint(i){
 				window.currentBuild.traits.line2.total++;
 				//set field
 				var traitLine = "#traitLine" + i;
+				lineValue = window.currentBuild.traits.line2.total;
 				$(traitLineName).find('.traitTotal').text(window.currentBuild.traits.line2.total);
 
 				//Set operable/inoperable fields
@@ -409,6 +420,7 @@ function addPoint(i){
 				window.currentBuild.traits.line3.total++;
 				//set field
 				var traitLine = "#traitLine" + i;
+				lineValue = window.currentBuild.traits.line3.total;
 				$(traitLineName).find('.traitTotal').text(window.currentBuild.traits.line3.total);
 
 				//Set operable/inoperable fields
@@ -428,6 +440,7 @@ function addPoint(i){
 				window.currentBuild.traits.line4.total++;
 				//set field
 				var traitLine = "#traitLine" + i;
+				lineValue = window.currentBuild.traits.line4.total;
 				$(traitLineName).find('.traitTotal').text(window.currentBuild.traits.line4.total);
 
 				//Set operable/inoperable fields
@@ -447,6 +460,7 @@ function addPoint(i){
 				window.currentBuild.traits.line5.total++;
 				//set field
 				var traitLine = "#traitLine" + i;
+				lineValue = window.currentBuild.traits.line5.total;
 				$(traitLineName).find('.traitTotal').text(window.currentBuild.traits.line5.total);
 
 				//Set operable/inoperable fields
@@ -466,7 +480,7 @@ function addPoint(i){
 	}
 
 	//Deal with min/max total conditions
-	
+	modifyTraitLine(traitLineName, lineValue);
 
 	if(currentTotal === 14) {
 		//Adding a trait maxes allocated points
@@ -486,10 +500,12 @@ function removePoint(i){
 	var traitLineNum = i+1;
 	var traitLineName = "#traitLine" + traitLineNum;
 	var traitOperationLine = "#traitOperationLine" + traitLineNum;
+	var lineValue = 0;
 	switch(i){
 		case 0:
 			if(window.currentBuild.traits.line1.total > 0) {
 				window.currentBuild.traits.line1.total--;
+				lineValue = window.currentBuild.traits.line1.total;
 				//set field
 				var traitLine = "#traitLine" + i;
 				$(traitLineName).find('.traitTotal').text(window.currentBuild.traits.line1.total);
@@ -509,6 +525,7 @@ function removePoint(i){
 		case 1:
 			if(window.currentBuild.traits.line2.total > 0) {
 				window.currentBuild.traits.line2.total--;
+				lineValue = window.currentBuild.traits.line2.total;
 				//set field
 				var traitLine = "#traitLine" + i;
 				$(traitLineName).find('.traitTotal').text(window.currentBuild.traits.line2.total);
@@ -527,6 +544,7 @@ function removePoint(i){
 		case 2:
 			if(window.currentBuild.traits.line3.total > 0) {
 				window.currentBuild.traits.line3.total--;
+				lineValue = window.currentBuild.traits.line3.total;
 				//set field
 				var traitLine = "#traitLine" + i;
 				$(traitLineName).find('.traitTotal').text(window.currentBuild.traits.line3.total);
@@ -545,6 +563,7 @@ function removePoint(i){
 		case 3:
 			if(window.currentBuild.traits.line4.total > 0) {
 				window.currentBuild.traits.line4.total--;
+				lineValue = window.currentBuild.traits.line4.total;
 				//set field
 				var traitLine = "#traitLine" + i;
 				$(traitLineName).find('.traitTotal').text(window.currentBuild.traits.line4.total);
@@ -563,6 +582,7 @@ function removePoint(i){
 		case 4:
 			if(window.currentBuild.traits.line5.total > 0) {
 				window.currentBuild.traits.line5.total--;
+				lineValue = window.currentBuild.traits.line5.total;
 				//set field
 				var traitLine = "#traitLine" + i;
 				$(traitLineName).find('.traitTotal').text(window.currentBuild.traits.line5.total);
@@ -582,6 +602,7 @@ function removePoint(i){
 			return;
 	}
 
+	modifyTraitLine(traitLineName, lineValue);
 	if(currentTotal === 0) {
 		//All subtraction now inactive
 		$(".traitSubtraction").removeClass("lightBtn");
@@ -592,6 +613,69 @@ function removePoint(i){
 		$(".traitAddition").removeClass("inactiveButton");
 	}
 }
+
+
+//Concerned about what you gain
+function modifyTraitLine(traitLineName, lineValue) {
+	var activeIcon = "fa fa-dot-circle-o";
+	var inactiveIcon = "fa fa-circle-o";
+	var inactiveHexOverride = "hb-inactiveOverride";
+	var inactiveTrait = "inputSelectionInactive"
+	if(lineValue === 0) {
+		//Remove Minor
+		$(traitLineName).find('.minorTrait1').addClass(inactiveHexOverride);
+		$(traitLineName).find('.minorTrait1 i').removeClass(activeIcon);
+		$(traitLineName).find('.minorTrait1 i').addClass(inactiveIcon);
+	}else if (lineValue===1) {
+		//Gain from 0-1, loss from 1-2
+		//Add Minor
+		$(traitLineName).find('.minorTrait1').removeClass(inactiveHexOverride);
+		$(traitLineName).find('.minorTrait1 i').removeClass(inactiveIcon);
+		$(traitLineName).find('.minorTrait1 i').addClass(activeIcon);
+		
+		//Lose Trait
+		$(traitLineName).find('.adeptTrait').val(0);
+		$(traitLineName).find('.adeptTrait').addClass(inactiveTrait);
+	} else if(lineValue===2) {
+		$(traitLineName).find('.minorTrait2').addClass(inactiveHexOverride);
+		$(traitLineName).find('.minorTrait2 i').removeClass(activeIcon);
+		$(traitLineName).find('.minorTrait2 i').addClass(inactiveIcon);
+		//Add Trait
+		$(traitLineName).find('.adeptTrait').removeClass(inactiveTrait);
+	} else if(lineValue===3) {
+		//Remove Minor
+		$(traitLineName).find('.minorTrait2').removeClass(inactiveHexOverride);
+		$(traitLineName).find('.minorTrait2 i').removeClass(inactiveIcon);
+		$(traitLineName).find('.minorTrait2 i').addClass(activeIcon);
+
+		//Lose Trait
+		$(traitLineName).find('.masterTrait').val(0);
+		$(traitLineName).find('.masterTrait').addClass(inactiveTrait);
+	} else if(lineValue===4) {
+		//Add Minor
+		$(traitLineName).find('.minorTrait3').addClass(inactiveHexOverride);
+		$(traitLineName).find('.minorTrait3 i').removeClass(activeIcon);
+		$(traitLineName).find('.minorTrait3 i').addClass(inactiveIcon);
+
+		//Add Trait
+		$(traitLineName).find('.masterTrait').removeClass(inactiveTrait);
+	} else if(lineValue===5) {
+		//Remove Minor
+		$(traitLineName).find('.minorTrait3').removeClass(inactiveHexOverride);
+		$(traitLineName).find('.minorTrait3 i').removeClass(inactiveIcon);
+		$(traitLineName).find('.minorTrait3 i').addClass(activeIcon);
+
+		//Lose Trait
+		$(traitLineName).find('.grandMasterTrait').val(0);
+		$(traitLineName).find('.grandMasterTrait').addClass(inactiveTrait);
+	} else if(lineValue===6) {
+
+		//Add Trait
+		$(traitLineName).find('.grandMasterTrait').removeClass(inactiveTrait);
+	}
+
+}
+
 
 
 /**
