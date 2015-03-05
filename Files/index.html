@@ -28,8 +28,9 @@
 				<td id="appIcon"><span class="hb hb-xxs"></span><span class="emphasis">Traits v0.1</span></td>
 				<td id="classNameSlot"><span id="classNameTop" class="emphasis"></span></td>
 				<td>
+					<i id="settings" class="fa fa-cog fa-lg activeIcon"></i>
 					<i id="minimize" class="fa fa-angle-down fa-lg activeIcon" onclick="minimizeToggle()"></i>
-					<i id="minimize" class="fa fa-times fa-lg activeIcon" onclick="closeWindow();"></i>
+					<i id="close" class="fa fa-times fa-lg activeIcon" onclick="closeWindow();"></i>
 				</td>
 			</table></tr>
 		</div>
@@ -58,20 +59,43 @@
 
 				</div>
 			</div>
-			<div id="buildDetails">
-					<i class="fa fa-arrow-left fa-lg activeIcon" onclick="switchToMenu()"></i> &nbsp
+			
+			<div id="buildInteractions">
+				<div id="navColumn">
+					<table id="navTable">
+						<tr><td>
+							<span onClick="switchToMenu()" class="tinyText"><i class="fa fa-arrow-left fa-2x activeIcon"></i><br>Return</span>
+						</td></tr>
+						<tr><td>
+							<span class="tinyText"><i class="fa fa-list-ol fa-2x activeIcon"></i><br>Traits</span>
+						</td></tr>
+						<tr><td>
+							<span class="tinyText"><i class="fa fa-male fa-2x activeIcon"></i><br>Gear</span>
+						</td></tr>
+						<tr><td>
+							<span class="tinyText"><i class="fa fa-tasks fa-2x activeIcon"></i><br>Stats</span>
+						</td></tr>
+						<tr><td>
+							<span class="tinyText"><i class="fa fa-pencil fa-2x activeIcon"></i><br>Notes</span>
+						</td></tr>
+					</table>
+				</div>
+				<div id="buildDetails">
 					<input type="text" id="buildName" class="inputText" name="buildName">
 					<select id="gameMode" class="inputSelection gameModeBox">
 						<option value=0 selected="selected">WvW</option>'
 						<option value=1>PvP</option>
 						<option value=2>PvE</option>
 					</select>
-			</div>
-			<div id="traitEditor">
-				<table id="traitTable">
-				</table>
-				<div id="traitTools">
-					<i id="save" class="fa fa-floppy-o fa-lg activeIcon" onClick="saveBuild()"></i>
+				</div>
+				<div id = "buildEditor">	
+					<div id="traitEditor">
+						<table id="traitTable">
+						</table>
+					</div>
+					<div id="traitTools">
+						<span class="activeSpan" onClick="saveBuild()">Save Changes <i id="save" class="fa fa-floppy-o fa-lg activeIcon"></i></span>
+					</div>
 				</div>
 			</div>
 		</div>

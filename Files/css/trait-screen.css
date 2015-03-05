@@ -1,3 +1,7 @@
+#buildInteractions{
+	height:100%;
+}
+
 #traitTools {
 	width: 100%;
 	text-align: right;
@@ -23,3 +27,4 @@
 .traitOperation {
 	width: 25px;
 }
+ 

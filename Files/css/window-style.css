@@ -150,10 +150,39 @@ html, body {
 
 #buildDetails {
 	width: 100%;
+	height: 25px;
 }
 #buildDetails .inputText{
 	width: 25%;
 }
 #gameMode {
 	float: right;
+}
+#buildEditor  {
+	margin-left: 90px;
+}
+#navColumn {
+	text-align: center;
+	margin: 0;
+    padding: 0;
+	float:left;
+	width: 80px;
+	height: 375px;
+	border-width:1px; 
+	border-radius:1px; 
+	border-style:solid; 
+	border-color:rgba(0, 0, 0, 1); 
+	background-color:rgba(0, 0, 0, 0.6);
+}
+
+#navColumn span:hover, i:hover span{
+	color: white;
+}
+#navTable {
+	width:100%;
+	height:100%;
+}
+
+.activeSpan:hover {
+	color: white;
 }

@@ -4,8 +4,8 @@ $(document).ready(function(){
 	window.displayContext='menu';
 	loadAllTraits();
 	$("#buildDetails").hide();
-	$("#traitEditor").hide();
-	$("#return").hide();
+	$("#buildEditor").hide();
+	$("#navColumn").hide();
     $("#menu").show();
 
 });
@@ -14,18 +14,20 @@ $(document).ready(function(){
 function switchToMenu() {
 	window.displayContext='menu';
 	populateClassBuilds(window.className);
-	$("#traitEditor").hide();
+	$("#navColumn").hide();
+	$("#buildEditor").hide();
 	$("#buildDetails").hide();
-	$("#return").hide();
 	$("#menu").show();
 }
 
 function switchToTraits() {
 	window.displayContext='traits';
 	$("#menu").hide();
-	$("#return").show();
+
+	$("#navColumn").show();
 	$("#buildDetails").show();
 	$("#traitEditor").show();
+	$("#buildEditor").show();
 }
 
 function minimizeToggle() {
@@ -35,7 +37,6 @@ function minimizeToggle() {
     	//hide content
     	$("#content").hide();
     	$("#classNameTop").hide();
-    	$("#return").hide();
     	//toggle min on
     	window.minimized = true;
         $("#topBar").animate({marginLeft:425,width:175},{duration: 400, queue: false });
@@ -44,7 +45,6 @@ function minimizeToggle() {
         $("#topBar").animate({width:600, marginLeft: 0},{duration: 400, queue: false });
         $("#content").show();
         $("#classNameTop").show();
-        if(window.displayContext!=='menu') $("#return").show();
     };
 }
 //Prettify template data

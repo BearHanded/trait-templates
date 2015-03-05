@@ -2,8 +2,19 @@
 	margin: 0;
     padding: 0;
 	float:left;
-	width: 150px;
+	width: 125px;
+	height: 375px;
+	border-width:1px; 
+	border-radius:1px; 
+	border-style:solid; 
+	border-color:rgba(0, 0, 0, 1); 
+	background-color:rgba(0, 0, 0, 0.6);
 }
+#classTable {
+	padding:0px;  
+	width:100%;
+}
+
 .classButton:hover {
 	color: white;
 }
@@ -24,16 +35,6 @@
 
 #buildList tr:hover {
 	color: white;
-}
-
-
-#classTable {
-	padding:0px; 
-	border-width:1px; 
-	border-radius:1px; 
-	border-style:solid; 
-	border-color:rgba(0, 0, 0, 1); 
-	background-color:rgba(0, 0, 0, 0.7); 
 }
 
 .alternateRows tr:nth-child(odd) {
