@@ -8,8 +8,11 @@ $(document).ready(function(){
 	$("#navColumn").hide();
     $("#menu").show();
 
+    $('#traitEditor').on('change', '.trait', function() {
+    	//Currently have the trait object
+    	updateOnTraitSelection($(this).attr('traitLine'));
+	});
 });
-
 
 function switchToMenu() {
 	window.displayContext='menu';
@@ -24,9 +27,26 @@ function switchToTraits() {
 	window.displayContext='traits';
 	$("#menu").hide();
 
+	//hide screens of the same level
+	$("#comingSoon").hide();
+
 	$("#navColumn").show();
 	$("#buildDetails").show();
 	$("#traitEditor").show();
+	$("#buildEditor").show();
+
+
+}
+
+function comingSoon() {
+	window.displayContext='comingSoon';
+	$("#menu").hide();
+
+	$("#navColumn").show();
+	$("#buildDetails").show();
+	$("#traitEditor").hide();
+
+	$("#comingSoon").show();
 	$("#buildEditor").show();
 }
 
@@ -88,29 +108,34 @@ function traitValueToRomanNumeral(value) {
 
 
 //Template Save management
+//  Adds a new template if templateObject is set
+//	if templateObject is undefined, simply saves the current list of builds
 function saveAllTraits(templateObject) {
-	if(!templateObject.id) {
-		templateObject.id = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-    		var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
-    		return v.toString(16);
-		});
-		//Add new build
-		if(!window.templates) {
-			window.templates = [];
-			window.templates[0] = templateObject;
+	if(templateObject){
+		if(!templateObject.id) {
+			templateObject.id = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+	    		var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+	    		return v.toString(16);
+			});
+			//Add new build
+			if(!window.templates) {
+				window.templates = [];
+				window.templates[0] = templateObject;
+			} else {
+				var length = window.templates.length;
+				window.templates[length] = templateObject;
+			}
 		} else {
-			var length = window.templates.length;
-			window.templates[length] = templateObject;
-		}
-	} else {
-	//ID is not new. Check to make sure to save over old copy
-		for(i=0; i<window.templates.length; i++) {
-			if(window.templates[i].id === templateObject.id) window.templates[i] = templateObject;
+		//ID is not new. Check to make sure to save over old copy
+			for(i=0; i<window.templates.length; i++) {
+				if(window.templates[i].id === templateObject.id) window.templates[i] = templateObject;
+			}
 		}
 	}
 	//Save json object
 	localStorage.setItem('gw2templates', JSON.stringify(window.templates));
 }
+
 
 function loadAllTraits() {
 	window.templates = JSON.parse(localStorage.getItem('gw2templates'));
@@ -124,6 +149,20 @@ function loadById(id) {
 		//Matches, set as target and return
 		if(window.templates[i].id === id) {
 			window.currentBuild = window.templates[i];
+
+			return true;
+		}
+	}
+	return false;
+}
+
+function deleteById(id) {
+	if(!window.templates) return;
+	for(i=0; i<window.templates.length; i++) {
+		//Matches, set as target and return
+		if(window.templates[i].id === id) {
+			window.templates.splice(i,1);
+			localStorage.setItem('gw2templates', JSON.stringify(window.templates));
 			return true;
 		}
 	}

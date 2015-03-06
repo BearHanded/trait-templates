@@ -29,17 +29,27 @@
 	text-align: right;
 }
 
+.modifyBuildColumn {
+	float: right;
+	text-align: right;
+}
+
+.deleteBuild:hover {
+	color: red !important;
+}
 #buildList {
 	width:100%;
 }
 
-#buildList tr:hover {
+#buildList td:hover {
 	color: white;
 }
 
 .alternateRows tr:nth-child(odd) {
 	background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.5)), to(rgba(0, 0, 0, 0.2)));
 }
+
+
 
 .gameModeDisplay {
 	float: right;

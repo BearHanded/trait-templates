@@ -29,11 +29,11 @@ function populateClassBuilds(className){
 				}
 
 				html += '<tr><td onClick=openBuild("' + window.templates[i].id + '")>' + window.templates[i].buildName 
-				+ '</td></tr>';
+				+ '</td><td class="modifyBuildColumn deleteBuild" onClick=deleteBuild("' + window.templates[i].id + '")> <i class="fa fa-minus fa-lg"></i></td></tr>';
 			}
     	}
 	}
-    html += '<tr><td id="newBuildLink" onClick=newBuild()>New Build +</td></tr>';
+    html += '<tr><td></td><td id="newBuildLink" class="modifyBuildColumn" onClick=newBuild()>New Build <i class="fa fa-plus fa-lg"></i></td></tr>';
     $('#buildList').append(html);
 }
 
@@ -46,6 +46,16 @@ function openBuild(buildId) {
 	initTraits();
 	//Switch divs
 	switchToTraits();
+}
+
+function deleteBuild(buildId) {
+	//Set target in window
+	success = deleteById(buildId);
+
+	if(success){
+		//Redraw options
+		populateClassBuilds(window.className);
+	}
 }
 
 //Open an empty template page

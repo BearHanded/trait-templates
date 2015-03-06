@@ -46,31 +46,37 @@ function initTraits() {
 		var trueNum = i+1;
 		//Set some data based on line
 		var traitValue = 0
+		var traitObject;
 		if(i===0) {
+			traitObject = window.currentBuild.traits.line1;
 			traitValue = window.currentBuild.traits.line1.total;
 			if(!traitValue) {
 				traitValue = 0;
 				window.currentBuild.traits.line1.total = 0;
 			}
 		} else if (i===1) {
+			traitObject = window.currentBuild.traits.line2;
 			traitValue = window.currentBuild.traits.line2.total;
 			if(!traitValue) {
 				traitValue = 0;
 				window.currentBuild.traits.line2.total = 0;
 			}
 		} else if (i===2) {
+			traitObject = window.currentBuild.traits.line3;
 			traitValue = window.currentBuild.traits.line3.total;
 			if(!traitValue) {
 				traitValue = 0;
 				window.currentBuild.traits.line3.total = 0;
 			}
 		} else if (i===3) {
+			traitObject = window.currentBuild.traits.line4;
 			traitValue = window.currentBuild.traits.line4.total;
 			if(!traitValue) {
 				traitValue = 0;
 				window.currentBuild.traits.line4.total = 0;
 			}
 		} else if (i===4) {
+			traitObject = window.currentBuild.traits.line5;
 			traitValue = window.currentBuild.traits.line5.total;
 			if(!traitValue) {
 				traitValue = 0;
@@ -98,56 +104,68 @@ function initTraits() {
 			+ '<td class="tinyText">' 
         	+ getLineBonus(i, 1) + '</td>';
 		//Complete trait line
-        html += '<td rowspan="2">' + getMinorSymbol(traitValue, 1) + '</td><td rowspan="2">' + generateTraitOptions(i, 0, traitValue) + '</td><td rowspan="2">' 
-        	+ getMinorSymbol(traitValue, 2) + '</td><td rowspan="2">' + generateTraitOptions(i, 1, traitValue) + '</td><td rowspan="2">' 
-        	+ getMinorSymbol(traitValue, 3) + '</td><td rowspan="2">' + generateTraitOptions(i, 2, traitValue) + '</td></tr>';
+        html += '<td rowspan="2">' + getMinorSymbol(trueNum, traitValue, 1) + '</td><td rowspan="2">' + generateTraitOptions(trueNum, 0, traitValue, traitObject.adept) 
+        	+ '</td><td rowspan="2">' 
+        	+ getMinorSymbol(trueNum, traitValue, 2) + '</td><td rowspan="2">' + generateTraitOptions(trueNum, 1, traitValue, traitObject.master) 
+        	+ '</td><td rowspan="2">' 
+        	+ getMinorSymbol(trueNum, traitValue, 3) + '</td><td rowspan="2">' + generateTraitOptions(trueNum, 2, traitValue, traitObject.grandmaster) 
+        	+ '</td></tr>';
         //Bottom Row
         html += '<tr id="traitOperationLine'+ trueNum +'"><td>' + '<button class="' + subtractionClass + ' traitOperation traitSubtraction" onClick="removePoint(' + i +')">-</button>'
         	+ '<button class="'+ additionClass + ' traitOperation traitAddition" onClick="addPoint(' + i +')">+</button>' 
         	+ '</td><td class="tinyText">' 
         	+ getLineBonus(i, 2) + '</td></tr>';
     }
+
     $('#traitTable').append(html);
 
     //Appended: update selected values - 
     updateTraitSelections();
+    //Update tooltips
+    for(i=1; i<=5;i++) {
+    	updateOnTraitSelection(i);
+    }
 }
 
 /**
  *	Generates the html for each set of trait options. The option is given a class of adeptTrait/masterTrait/grandMasterTrait
  */
-function generateTraitOptions(traitLine, traitLevel, traitValue) {
+function generateTraitOptions(traitLine, traitLevel, traitValue, selected) {
 	var traitOptions = '';
 	var traitHtmlClass = '';
 	var inactiveTrait = "inputSelectionInactive";
 	switch(traitLevel){	
 		case 0:
 			if(traitValue>=2) inactiveTrait = ""; 
-			traitHtmlClass = 'class="adeptTrait traitDescription inputSelection '+ inactiveTrait + '"';
+			traitHtmlClass = 'class="adeptTrait traitDescription trait inputSelection '+ inactiveTrait + '"';
 			break;
 		case 1:
 			if(traitValue>=4) inactiveTrait = "";
-			traitHtmlClass = 'class="masterTrait traitDescription inputSelection '+ inactiveTrait + '"';
+			traitHtmlClass = 'class="masterTrait traitDescription trait inputSelection '+ inactiveTrait + '"';
 			break;
 		case 2:
 			if(traitValue===6) inactiveTrait = "";
-			traitHtmlClass = 'class="grandMasterTrait traitDescription inputSelection '+ inactiveTrait + '"';
+			traitHtmlClass = 'class="grandMasterTrait traitDescription trait inputSelection '+ inactiveTrait + '"';
 			break;
 		default:
 	}
 
 	//Append tooltip title to class
 
+	//var lineNumber= ' traitLine= "';
+	//lineNumber += traitLine;
+	//lineNumber += '"';
+	var lineNumber = "";
 
 	//Generate options
-	traitOptions += '<select ' + traitHtmlClass + ' ' + generateTooltip(window.className, traitLine, traitLevel) + '>'
+	traitOptions += '<select ' + traitHtmlClass + '>'
 		+'<option value="0" selected="selected"> </option>'
-		+'<option value=1>I</option>'
-		+'<option value=2>II</option>'
-		+'<option value=3>III</option>'
-		+'<option value=4>IV</option>'
-		+'<option value=5>V</option>'
-		+'<option value=6>VI</option>';
+		+'<option value=1 '+ generateTooltip(window.className, traitLine, 1) + '>I</1ption>'
+		+'<option value=2 '+ generateTooltip(window.className, traitLine, 2) + '>II</option>'
+		+'<option value=3 '+ generateTooltip(window.className, traitLine, 3) + '>III</option>'
+		+'<option value=4 '+ generateTooltip(window.className, traitLine, 4) + '>IV</option>'
+		+'<option value=5 '+ generateTooltip(window.className, traitLine, 5) + '>V</option>'
+		+'<option value=6 '+ generateTooltip(window.className, traitLine, 6) + '>VI</option>';
   	if(traitLevel>0) {
   		traitOptions += '<option value=7>VII</option>'
   			+'<option value=8>VIII</option>'
@@ -166,7 +184,7 @@ function generateTraitOptions(traitLine, traitLevel, traitValue) {
 /**
  * Returns the generated icon for locked traits modifiable if locked
  */
-function getMinorSymbol(allocatedPoints, minorTraitNumber) {
+function getMinorSymbol(traitLine, allocatedPoints, minorTraitNumber) {
 	var activeIcon = "fa fa-dot-circle-o";
 	var inactiveIcon = "fa fa-circle-o";
 	var inactiveHexOverride = "hb-inactiveOverride";
@@ -179,7 +197,7 @@ function getMinorSymbol(allocatedPoints, minorTraitNumber) {
 		inactiveHexOverride = "";	//clear inactive override
 	} 
 
-	return '<span class="hb hb-xxs ' + inactiveHexOverride + ' ' + minorClass + '"><i class="'+ usedIcon+ '"></i></span>';
+	return '<span class="hb hb-xxs ' + inactiveHexOverride + ' ' + minorClass + '" ' + generateMinorTooltip(window.className, traitLine, minorTraitNumber) + '><i class="'+ usedIcon+ '"></i></span>';
 }
 
 /**
@@ -361,6 +379,19 @@ function updateTraitSelections() {
 	if(currentBuild.traits.line5.adept) $("#traitLine5").find('.adeptTrait').val(currentBuild.traits.line5.adept);
 	if(currentBuild.traits.line5.master) $("#traitLine5").find('.masterTrait').val(currentBuild.traits.line5.master);
 	if(currentBuild.traits.line5.grandmaster) $("#traitLine5").find('.grandMasterTrait').val(currentBuild.traits.line5.grandmaster);
+
+	//ASSIGN TRAIT VALUES
+	$("#traitLine1").find('.trait').attr('traitLine', "1");
+	$("#traitLine2").find('.trait').attr('traitLine', "2");
+	$("#traitLine3").find('.trait').attr('traitLine', "3");
+	$("#traitLine4").find('.trait').attr('traitLine', "4");
+	$("#traitLine5").find('.trait').attr('traitLine', "5");
+
+	//UPDATE THOSE DAMN MENUS
+	/*
+	$(".selectable").selectmenu();
+	$(".selectable").selectmenu("refresh");
+	*/
 }
 
 /**
@@ -620,7 +651,7 @@ function modifyTraitLine(traitLineName, lineValue) {
 	var activeIcon = "fa fa-dot-circle-o";
 	var inactiveIcon = "fa fa-circle-o";
 	var inactiveHexOverride = "hb-inactiveOverride";
-	var inactiveTrait = "inputSelectionInactive"
+	var inactiveTrait = "inputSelectionInactive";
 	if(lineValue === 0) {
 		//Remove Minor
 		$(traitLineName).find('.minorTrait1').addClass(inactiveHexOverride);
@@ -676,7 +707,41 @@ function modifyTraitLine(traitLineName, lineValue) {
 
 }
 
+/**
+ *	Updates the selected traits, their tooltips, and what options are currently unclickable
+ **/
+function updateOnTraitSelection(traitLine) {
+	//getLineName
+	var traitLineName = "#traitLine" + traitLine;
 
+	//Enable all
+	$(traitLineName + " option").attr('disabled',false)
+	
+	//Get val of element 1
+	var trait1 = $(traitLineName).find('.adeptTrait').val();
+	//remove as option from other 2
+	if(trait1 > 0) {
+		$(traitLineName + " .masterTrait option[value='" + trait1 + "']").attr('disabled','disabled');
+		$(traitLineName + " .grandMasterTrait option[value='" + trait1 + "']").attr('disabled','disabled');
+	}
+	//Repeat
+	var trait2 = $(traitLineName).find('.masterTrait').val();
+	if(trait2 > 0) {
+		$(traitLineName + " .adeptTrait option[value='" + trait2 + "']").attr('disabled','disabled');
+		$(traitLineName + " .grandMasterTrait option[value='" + trait2 + "']").attr('disabled','disabled');
+	}
+
+	var trait3 = $(traitLineName).find('.grandMasterTrait').val();
+	if(trait3 > 0) {
+		$(traitLineName + " .masterTrait option[value='" + trait3 + "']").attr('disabled','disabled');
+		$(traitLineName + " .adeptTrait option[value='" + trait3 + "']").attr('disabled','disabled');
+	}
+
+	//Redraw tooltips on all three
+	$(traitLineName).find('.adeptTrait').prop('title', getDescription(window.className, traitLine, trait1));
+	$(traitLineName).find('.masterTrait').prop('title', getDescription(window.className, traitLine, trait2));
+	$(traitLineName).find('.grandMasterTrait').prop('title', getDescription(window.className, traitLine, trait3));
+}
 
 /**
  *	Returns the current number of points spend in the build

@@ -1,0 +1,6 @@
+.ui-tooltip {
+    border: 1px solid rgba(255, 255, 255, 0.7);
+	background:rgba(0, 0, 0, 1); 
+    color: white;
+    font: 11px Tahoma, Verdana;
+}

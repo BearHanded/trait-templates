@@ -3,16 +3,19 @@
 	<head> 
 		<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
 		<title>V.01 Traits</title>
+
+		<!-- Jquery AJAX imports-->
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    	<!-- Include Tipsy: https://github.com/jaz303/tipsy, MIT License -->
-    	<script type='text/javascript' src='js/jquery.tipsy.js'></script>
-    	<link rel="stylesheet" href="css/tipsy.css" type="text/css" />
+ 		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css" />
+		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+
     	<!-- css -->
     	<link rel="stylesheet" href="css/window-style.css" />
     	<link rel="stylesheet" href="css/trait-screen.css" />
     	<link rel="stylesheet" href="css/menu.css" />
     	<link rel="stylesheet" type="text/css" href="assets/font-awesome-4.3.0/css/font-awesome.min.css"> 
     	<link rel="stylesheet" type="text/css" href="css/hexagons.css"> 
+    	<link rel="stylesheet" type="text/css" href="css/tooltips.css"> 
 
     	<!-- trait scripts -->
     	<script src="js/hexagons.min.js"></script>
@@ -21,7 +24,8 @@
 		<script type="text/javascript" src="js/trait-descriptions.js"></script>
 		<script type="text/javascript" src="js/overwolf-tools.js"></script>
 		<script type="text/javascript" src="js/menu.js"></script>
-		</head>
+
+	</head>
 
 	<body>
 		<div id="topBar" onmousedown="dragMove();">
@@ -65,19 +69,19 @@
 				<div id="navColumn">
 					<table id="navTable">
 						<tr><td>
-							<span onClick="switchToMenu()" class="tinyText"><i class="fa fa-arrow-left fa-2x activeIcon"></i><br>Return</span>
+							<span onClick="switchToMenu()" class="tinyText"><i class="fa fa-arrow-left fa-2x"></i><br>Return</span>
 						</td></tr>
 						<tr><td>
-							<span class="tinyText"><i class="fa fa-list-ol fa-2x activeIcon"></i><br>Traits</span>
+							<span onClick="switchToTraits()" class="tinyText"><i class="fa fa-list-ol fa-2x"></i><br>Traits</span>
 						</td></tr>
 						<tr><td>
-							<span class="tinyText"><i class="fa fa-male fa-2x activeIcon"></i><br>Gear</span>
+							<span onClick="comingSoon()" class="tinyText"><i class="fa fa-male fa-2x"></i><br>Gear</span>
 						</td></tr>
 						<tr><td>
-							<span class="tinyText"><i class="fa fa-tasks fa-2x activeIcon"></i><br>Stats</span>
+							<span onClick="comingSoon()" class="tinyText"><i class="fa fa-tasks fa-2x"></i><br>Stats</span>
 						</td></tr>
 						<tr><td>
-							<span class="tinyText"><i class="fa fa-pencil fa-2x activeIcon"></i><br>Notes</span>
+							<span onClick="comingSoon()" class="tinyText"><i class="fa fa-pencil fa-2x"></i><br>Notes</span>
 						</td></tr>
 					</table>
 				</div>
@@ -93,6 +97,17 @@
 					<div id="traitEditor">
 						<table id="traitTable">
 						</table>
+					</div>
+					<div id="comingSoon">
+						<span class="emphasis">This feature is coming soon</span>
+						<br>
+						<select name="speed" id="speed" class="selectable">
+  							<option id="first">Slower</option> <!-- disabled by dynamically-->
+						 	<option>Slow</option>
+  							<option selected="selected">Medium</option>
+  							<option disabled>Fast</option> <!-- disabled by default-->
+  							<option>Faster</option>
+						</select>
 					</div>
 					<div id="traitTools">
 						<span class="activeSpan" onClick="saveBuild()">Save Changes <i id="save" class="fa fa-floppy-o fa-lg activeIcon"></i></span>

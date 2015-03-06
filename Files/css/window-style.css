@@ -127,23 +127,6 @@ html, body {
 	font-family: Tahoma, Verdana, Segoe, sans-serif;
 }
 
-.traitInputSelection { 
-	padding:2px; 
-	font-size:12px; 
-	border-width:1px; 
-	border-radius:1px; 
-	border-style:solid; 
-	border-color:rgba(0, 0, 0, 0.7); 
-	background-color:#fae5b1; 
-	color:#000000;  
-	/* font-family: Tahoma, Verdana, Segoe, sans-serif; */
-	font-family: Georgia, Times, “Times New Roman”, serif;
-	font-size: 15px;
-	padding: 5;
-	font-weight: bold;
-	text-align: center;
-
-} 
 
 .inputSelectionInactive { 
 	pointer-events: none;
@@ -184,6 +167,9 @@ html, body {
 #buildEditor  {
 	margin-left: 90px;
 }
+#comingSoon {
+	margin-left: 90px;
+}
 #navColumn {
 	text-align: center;
 	margin: 0;
@@ -198,7 +184,7 @@ html, body {
 	background-color:rgba(0, 0, 0, 0.6);
 }
 
-#navColumn span:hover, i:hover span{
+#navColumn tr:hover {
 	color: white;
 }
 #navTable {
