@@ -307,19 +307,19 @@ var guardianMinorDescriptions = [[
 								]];
 
 var engineerDescriptions =[[
-								{name:"", description:""},
-								{name:"", description:""},
-								{name:"", description:""},
-								{name:"", description:""},
-								{name:"", description:""},
-								{name:"", description:""},
-								{name:"", description:""},
-								{name:"", description:""},
-								{name:"", description:""},
-								{name:"", description:""},
-								{name:"", description:""},
-								{name:"", description:""},
-								{name:"", description:""}
+								{name:"Acidic Elixirs", description:"Thrown elixirs cause damage when they land and remove a boon."},
+								{name:"Shrapnel", description:"Explosions have a chance to cause bleeding."},
+								{name:"Forceful Explosives", description:"Bombs and mines have a larger explosion radius."},
+								{name:"Empowering Adrenaline", description:"Get a damage bonus when endurance is not full."},
+								{name:"Accelerant-Packed Turrets", description:"Turrets explode when killed. When your turrets explode, they push back foes."},
+								{name:"Exploit Weakness", description:"Cripple foes you hit when they are below the health threshold."},
+								{name:"Explosive Powder", description:"Improves damage from explosions."},
+								{name:"Short Fuse", description:"Reduces recharge on bombs and grenades."},
+								{name:"Incendiary Powder", description:"Critical hits inflict burning."},
+								{name:"Enhance Performance", description:"Gain might when you use a heal skill."},
+								{name:"Grenadier", description:"You throw grenades farther, and each grenade kit skill produces an extra grenade."},
+								{name:"Autodefense Bomb Dispenser", description:"Drop a smoke bomb whenever you are disabled (stun, daze, knockdown, knockback, pull, launch, float, sink, or fear)."},
+								{name:"Synaptic Overload", description:"Gain quickness when you knock back or launch a foe."}
 							],
 							[
 								{name:"", description:""},
