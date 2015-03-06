@@ -12,7 +12,7 @@ html, body {
 }
 
 #topBar {
-	width:100%;
+	width:600px;
 	height: 25px;
 	vertical-align: middle;
 	position: absolute;
@@ -46,7 +46,7 @@ html, body {
 	background-size: cover;
 	position: absolute;
 	margin-top: 25px;
-	width: 100%;
+	width: 600px;
 	height: 375px;
 }
 
