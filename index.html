@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+	<head> 
+		<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+		<title>V.01 Traits</title>
+
+		<!-- Jquery AJAX imports-->
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+ 		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css" />
+		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+
+    	<!-- css -->
+    	<link rel="stylesheet" href="Files/css/window-style.css" />
+    	<link rel="stylesheet" href="Files/css/trait-screen.css" />
+    	<link rel="stylesheet" href="Files/css/menu.css" />
+    	<link rel="stylesheet" type="text/css" href="Files/assets/font-awesome-4.3.0/css/font-awesome.min.css"> 
+    	<link rel="stylesheet" type="text/css" href="Files/css/hexagons.css"> 
+    	<link rel="stylesheet" type="text/css" href="Files/css/tooltips.css"> 
+
+    	<!-- trait scripts -->
+    	<script src="Files/js/hexagons.min.js"></script>
+		<script type="text/javascript" src="Files/js/global-scripts.js"></script>
+		<script type="text/javascript" src="Files/js/trait-scripts.js"></script>
+		<script type="text/javascript" src="Files/js/trait-descriptions.js"></script>
+		<script type="text/javascript" src="Files/js/overwolf-tools.js"></script>
+		<script type="text/javascript" src="Files/js/menu.js"></script>
+
+	</head>
+
+	<body>
+		<div id="topBar" onmousedown="dragMove();">
+			<table id = "topBarTable"><tr>
+				<td id="appIcon"><span class="hb hb-xxs"></span><span class="emphasis">Traits v0.1</span></td>
+				<td id="classNameSlot"><span id="classNameTop" class="emphasis"></span></td>
+				<td>
+					<i id="settings" class="fa fa-cog fa-lg activeIcon"></i>
+					<i id="minimize" class="fa fa-angle-down fa-lg activeIcon" onclick="minimizeToggle()"></i>
+					<i id="close" class="fa fa-times fa-lg activeIcon" onclick="closeWindow();"></i>
+				</td>
+			</table></tr>
+		</div>
+		<div id="content">
+			<div id="menu">
+				<div id="classSelection">
+					<table id = "classTable" class="alternateRows">
+						<tr><td class="emphasis">Heavy</td></tr>
+						<tr><td class="classButton" onclick="populateClassBuilds('WARRIOR')" id="warriorButton">&nbsp&nbspWarrior</td></tr>
+						<tr><td class="classButton" onclick="populateClassBuilds('GUARDIAN')" id="guardianButton">&nbsp&nbspGuardian</td></tr>
+						<tr><td class="emphasis">Medium</td></tr>
+						<tr><td class="classButton" onclick="populateClassBuilds('ENGINEER')" id="engineerButton">&nbsp&nbspEngineer</td></tr>
+						<tr><td class="classButton" onclick="populateClassBuilds('RANGER')" id="rangerButton">&nbsp&nbspRanger</td></tr>
+						<tr><td class="classButton" onclick="populateClassBuilds('THIEF')" id="thiefButton">&nbsp&nbspThief</td></tr>
+						<tr><td class="emphasis">Light</td></tr>
+						<tr><td class="classButton" onclick="populateClassBuilds('ELEMENTALIST')" id="elementalistButton">&nbsp&nbspElementalist</td></tr>
+						<tr><td class="classButton" onclick="populateClassBuilds('NECROMANCER')" id="necromancerButton">&nbsp&nbspNecromancer</td></tr>
+						<tr><td class="classButton" onclick="populateClassBuilds('MESMER')" id="mesmerButton">&nbsp&nbspMesmer</td></tr>
+					</table>
+				</div>
+
+				<div id="buildSelection">
+					<table id="buildList" class="alternateRows">
+						<!-- NEW BUILD LINK WILL BE INSERTED HERE UPON SELECTING A CLASS -->
+					</table>
+
+				</div>
+			</div>
+			
+			<div id="buildInteractions">
+				<div id="navColumn">
+					<table id="navTable">
+						<tr><td>
+							<span onClick="switchToMenu()" class="tinyText"><i class="fa fa-arrow-left fa-2x"></i><br>Return</span>
+						</td></tr>
+						<tr><td>
+							<span onClick="switchToTraits()" class="tinyText"><i class="fa fa-list-ol fa-2x"></i><br>Traits</span>
+						</td></tr>
+						<tr><td>
+							<span onClick="comingSoon()" class="tinyText"><i class="fa fa-male fa-2x"></i><br>Gear</span>
+						</td></tr>
+						<tr><td>
+							<span onClick="comingSoon()" class="tinyText"><i class="fa fa-tasks fa-2x"></i><br>Stats</span>
+						</td></tr>
+						<tr><td>
+							<span onClick="comingSoon()" class="tinyText"><i class="fa fa-pencil fa-2x"></i><br>Notes</span>
+						</td></tr>
+					</table>
+				</div>
+				<div id="buildDetails">
+					<input type="text" id="buildName" class="inputText" name="buildName">
+					<select id="gameMode" class="inputSelection gameModeBox">
+						<option value=0 selected="selected">WvW</option>'
+						<option value=1>PvP</option>
+						<option value=2>PvE</option>
+					</select>
+				</div>
+				<div id = "buildEditor">	
+					<div id="traitEditor">
+						<table id="traitTable">
+						</table>
+					</div>
+					<div id="comingSoon">
+						<span class="emphasis">This feature is coming soon</span>
+						<br>
+						<select name="speed" id="speed" class="selectable">
+  							<option id="first">Slower</option> <!-- disabled by dynamically-->
+						 	<option>Slow</option>
+  							<option selected="selected">Medium</option>
+  							<option disabled>Fast</option> <!-- disabled by default-->
+  							<option>Faster</option>
+						</select>
+					</div>
+					<div id="traitTools">
+						<span class="activeSpan" onClick="saveBuild()">Save Changes <i id="save" class="fa fa-floppy-o fa-lg activeIcon"></i></span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
