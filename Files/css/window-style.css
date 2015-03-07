@@ -1,5 +1,5 @@
 ﻿html {
-	overflow: hidden;
+	overflow: hiddenaaaaaa;
 	height: 100%;
 	width: 100%;
 	color: #bdbec1;
@@ -9,6 +9,10 @@
 html, body {
     margin: 0;
     padding: 0;
+}
+
+body {
+    height: 402px;
 }
 
 #topBar {
@@ -176,7 +180,7 @@ html, body {
     padding: 0;
 	float:left;
 	width: 80px;
-	height: 375px;
+	height: 373px;
 	border-width:1px; 
 	border-radius:1px; 
 	border-style:solid; 

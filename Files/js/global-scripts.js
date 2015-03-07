@@ -55,15 +55,15 @@ function minimizeToggle() {
 	//resize bar
     if(!window.minimized){
     	//hide content
-    	$("#content").hide();
+    	$("#content").hide(400);
     	$("#classNameTop").hide();
     	//toggle min on
     	window.minimized = true;
-        $("#topBar").animate({marginLeft:425,width:175},{duration: 400, queue: false });
+        $("#topBar").animate({width:175},{duration: 400, queue: false });
     } else {
     	window.minimized = false;
-        $("#topBar").animate({width:600, marginLeft: 0},{duration: 400, queue: false });
-        $("#content").show();
+        $("#topBar").animate({width:600},{duration: 400, queue: false });
+        $("#content").show(400);
         $("#classNameTop").show();
     };
 }
