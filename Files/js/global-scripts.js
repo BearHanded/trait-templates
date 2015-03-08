@@ -5,6 +5,8 @@ $(document).ready(function(){
 	loadAllTraits();
 	$("#buildDetails").hide();
 	$("#buildEditor").hide();
+	$("#statsEditor").hide();
+	$("#gearEditor").hide();
 	$("#navColumn").hide();
     $("#menu").show();
 
@@ -29,10 +31,46 @@ function switchToTraits() {
 
 	//hide screens of the same level
 	$("#comingSoon").hide();
+	$("#statsEditor").hide();
+	$("#gearEditor").hide();
 
 	$("#navColumn").show();
 	$("#buildDetails").show();
 	$("#traitEditor").show();
+	$("#buildEditor").show();
+
+
+}
+
+function switchToGear() {
+	window.displayContext='traits';
+	$("#menu").hide();
+
+	//hide screens of the same level
+	$("#comingSoon").hide();
+	$("#statsEditor").hide();
+	$("#traitEditor").hide();
+
+	$("#navColumn").show();
+	$("#buildDetails").show();
+	$("#gearEditor").show();
+	$("#buildEditor").show();
+
+
+}
+
+function switchToStats() {
+	window.displayContext='traits';
+	$("#menu").hide();
+
+	//hide screens of the same level
+	$("#comingSoon").hide();
+	$("#traitEditor").hide();
+	$("#gearEditor").hide();
+
+	$("#navColumn").show();
+	$("#buildDetails").show();
+	$("#statsEditor").show();
 	$("#buildEditor").show();
 
 
@@ -44,7 +82,10 @@ function comingSoon() {
 
 	$("#navColumn").show();
 	$("#buildDetails").show();
+
 	$("#traitEditor").hide();
+	$("#statsEditor").hide();
+	$("#gearEditor").hide();
 
 	$("#comingSoon").show();
 	$("#buildEditor").show();

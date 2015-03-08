@@ -11,7 +11,7 @@
 
     	<!-- css -->
     	<link rel="stylesheet" href="css/window-style.css" />
-    	<link rel="stylesheet" href="css/trait-screen.css" />
+    	<link rel="stylesheet" href="css/build-editor.css" />
     	<link rel="stylesheet" href="css/menu.css" />
     	<link rel="stylesheet" type="text/css" href="assets/font-awesome-4.3.0/css/font-awesome.min.css"> 
     	<link rel="stylesheet" type="text/css" href="css/hexagons.css"> 
@@ -24,6 +24,7 @@
 		<script type="text/javascript" src="js/trait-descriptions.js"></script>
 		<script type="text/javascript" src="js/overwolf-tools.js"></script>
 		<script type="text/javascript" src="js/menu.js"></script>
+		<script type="text/javascript" src="js/gear-scripts.js"></script>
 
 	</head>
 
@@ -71,17 +72,17 @@
 						<tr><td>
 							<span onClick="switchToMenu()" class="tinyText"><i class="fa fa-arrow-left fa-2x"></i><br>Return</span>
 						</td></tr>
-						<tr><td>
-							<span onClick="switchToTraits()" class="tinyText"><i class="fa fa-list-ol fa-2x"></i><br>Traits</span>
+						<tr><td onClick="switchToTraits()">
+							<span class="tinyText"><i class="fa fa-list-ol fa-2x"></i><br>Traits</span>
 						</td></tr>
-						<tr><td>
-							<span onClick="comingSoon()" class="tinyText"><i class="fa fa-male fa-2x"></i><br>Gear</span>
+						<tr><td onClick="switchToGear()">
+							<span class="tinyText"><i class="fa fa-male fa-2x"></i><br>Gear</span>
 						</td></tr>
-						<tr><td>
-							<span onClick="comingSoon()" class="tinyText"><i class="fa fa-tasks fa-2x"></i><br>Stats</span>
+						<tr><td onClick="switchToStats()">
+							<span class="tinyText"><i class="fa fa-tasks fa-2x"></i><br>Stats</span>
 						</td></tr>
-						<tr><td>
-							<span onClick="comingSoon()" class="tinyText"><i class="fa fa-pencil fa-2x"></i><br>Notes</span>
+						<tr><td onClick="comingSoon()">
+							<span class="tinyText"><i class="fa fa-pencil fa-2x"></i><br>Notes</span>
 						</td></tr>
 					</table>
 				</div>
@@ -97,6 +98,43 @@
 					<div id="traitEditor">
 						<table id="traitTable">
 						</table>
+					</div>
+					<div id="gearEditor">
+						<table id="weaponSet1" class="gearTable">
+							<tr>
+								<tr><th>Weapon Set 1</th></tr>
+								<!-- Options for each weapon slot and multiple sets need to be generated-->
+								<td><select class="mainHand inputSelection"></select></td>
+								<td><select class="offHand inputSelection"></select></td>
+							</tr>
+							<tr>
+								<td><select class="mainHandStats inputSelection"></select></td>
+								<td><select class="offHandStats inputSelection"></select></td>
+							</tr>
+							<tr>
+								<td><select class="sigil1 inputSelection"></select></td>
+								<td><select class="sigil2 inputSelection"></select></td>
+							</tr>
+						</table>
+						<table id="weaponSet2" class="gearTable">
+							<tr><th>Weapon Set 2</th></tr>
+							<tr>
+								<!-- Options for each weapon slot and multiple sets need to be generated-->
+								<td><select class="mainHand inputSelection"></select></td>
+								<td><select class="offHand inputSelection"></select></td>
+							</tr>
+							<tr>
+								<td><select class="mainHandStats inputSelection"></select></td>
+								<td><select class="offHandStats inputSelection"></select></td>
+							</tr>
+							<tr>
+								<td><select class="sigil1 inputSelection"></select></td>
+								<td><select class="sigil2 inputSelection"></select></td>
+							</tr>
+						</table>
+					</div>
+					<div id="statsEditor">
+						<p>Stats menu</p>
 					</div>
 					<div id="comingSoon">
 						<span class="emphasis">This feature is coming soon</span>

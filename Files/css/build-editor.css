@@ -28,7 +28,7 @@
 	width: 25px;
 }
 
- .selectable { 
+.selectable { 
  	width: 75px;
  	height: 20px;
  	padding:2px; 
@@ -40,9 +40,19 @@
 	background-color:rgba(0, 0, 0, 0.7); 
 	color:#ffffff;  
 	font-family: Tahoma, Verdana, Segoe, sans-serif !important;
- }
+}
  
- .ui-button-text {
+.ui-button-text {
         font-family: Tahoma, Verdana, Segoe, sans-serif;
         font-size:12px; 
-    }
+}
+
+
+#gearEditor {
+	width: 100%;
+}
+.gearTable{
+	background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.5)), to(rgba(0, 0, 0, 0.2)));
+	display: inline-block;
+}
+}

@@ -44,6 +44,9 @@ function openBuild(buildId) {
 
 	//Prepare traits
 	initTraits();
+	//Generate gear options for the class
+	initGear();
+
 	//Switch divs
 	switchToTraits();
 }
@@ -63,6 +66,7 @@ function newBuild() {
 	//Prepare clean build
 	newBuildObject();
 	initTraits();
+	initGear();
 	//Prepare any data
 	switchToTraits();
 }

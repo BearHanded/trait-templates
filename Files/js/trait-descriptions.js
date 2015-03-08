@@ -43,22 +43,7 @@ function getDescription(className, traitLine, traitNumber) {
 	} else if(className === 'MESMER') {
  		trait = mesmerDescriptions[traitLine][traitNumber];
 	} else return '';
-	/*
-	if(className === 'GUARDIAN') {
-		return guardianDescriptions[traitLine][traitNumber];
-	} else if(className === 'ENGINEER') {
-		return engineerDescriptions[traitLine][traitNumber];
-	} else if(className === 'RANGER') {
-		return rangerDescriptions[traitLine][traitNumber];
-	} else if(className === 'THIEF') {
-		return thiefDescriptions[traitLine][traitNumber];
-	} else if(className === 'ELEMENTALIST') {
-		return elementalistDescriptions[traitLine][traitNumber];
-	} else if(className === 'NECROMANCER') {
-		return necromancerDescriptions[traitLine][traitNumber];
-	} else if(className === 'MESMER') {
-		return mesmerDescriptions[traitLine][traitNumber];
-	}*/
+	
 	return trait.name + "<br/>" + trait.description;
 }
 
@@ -99,22 +84,7 @@ function getMinorDescription(className, traitLine, traitNumber) {
 	} else if(className === 'MESMER') {
  		trait = mesmerMinorDescriptions[traitLine][traitNumber];
 	} else return '';
-	/*
-	if(className === 'GUARDIAN') {
-		return guardianDescriptions[traitLine][traitNumber];
-	} else if(className === 'ENGINEER') {
-		return engineerDescriptions[traitLine][traitNumber];
-	} else if(className === 'RANGER') {
-		return rangerDescriptions[traitLine][traitNumber];
-	} else if(className === 'THIEF') {
-		return thiefDescriptions[traitLine][traitNumber];
-	} else if(className === 'ELEMENTALIST') {
-		return elementalistDescriptions[traitLine][traitNumber];
-	} else if(className === 'NECROMANCER') {
-		return necromancerDescriptions[traitLine][traitNumber];
-	} else if(className === 'MESMER') {
-		return mesmerDescriptions[traitLine][traitNumber];
-	}*/
+	
 	return trait.name + "<br/>" + trait.description;
 }
 
