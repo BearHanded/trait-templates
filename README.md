@@ -4,4 +4,4 @@ This project was made for the 2014 Overwolf & Guild Wars 2 App Contest. It's int
 
 As the Contest deadline approached, Guild Wars 2 rehauled it's trait and build system for the introduction of specializations, and the app was abandoned. It would have required a complete rewrite and scrape of the gw2 wiki.
 
-The app was still a worthwhile project to practice jquery. 
+The app was still a worthwhile project to practice jquery and some python scripting. 
